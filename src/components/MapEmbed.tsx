@@ -15,7 +15,7 @@ export function MapEmbed({ s }: { s: S }) {
   }, []);
 
   return (
-    <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl border border-line bg-aqua-50 sm:aspect-[16/10] lg:aspect-auto lg:h-full lg:min-h-[26rem]">
+    <div className="relative h-[27rem] w-full overflow-hidden rounded-2xl border border-line bg-aqua-50 sm:h-auto sm:aspect-[16/10] lg:aspect-auto lg:h-full lg:min-h-[26rem]">
       {allowed ? (
         <iframe
           title={s.mapTitle}
