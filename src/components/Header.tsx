@@ -72,9 +72,9 @@ export function Header({ lang, s }: { lang: Locale; s: Strings }) {
         {s.a11y.skipToContent}
       </a>
       <header className={`sticky top-0 z-[70] transition-[background-color,border-color] duration-300 ${scrolled || open ? "border-b border-line bg-cream/85 backdrop-blur-md" : "border-b border-transparent bg-cream"}`}>
-        <div className="container-x flex h-[4.5rem] items-center justify-between gap-3">
+        <div className="container-x flex h-[4.75rem] items-center justify-between gap-3 sm:h-[5.5rem]">
           <Link href={`/${lang}/`} className="shrink-0 rounded-2xl">
-            <Logo lang={lang} />
+            <Logo lang={lang} heightClass="h-11 sm:h-[3.25rem]" />
           </Link>
 
           <nav aria-label={s.a11y.mainNav} className="hidden xl:block">
@@ -122,7 +122,7 @@ export function Header({ lang, s }: { lang: Locale; s: Strings }) {
 
         {/* Mobile menu */}
         <div id="mobile-menu" hidden={!open} className="xl:hidden">
-          <nav aria-label={s.a11y.mainNav} className="container-x max-h-[calc(100dvh-4.5rem)] overflow-y-auto pb-6">
+          <nav aria-label={s.a11y.mainNav} className="container-x max-h-[calc(100dvh-4.75rem)] overflow-y-auto pb-6">
             <ul className="grid gap-1 rounded-2xl border border-line bg-white p-2 shadow-[var(--shadow-soft)]">
               {!isHome && (
                 <li>
