@@ -114,11 +114,22 @@ export const clinic = {
    * Booking form delivery.
    *  - "netlify": uses Netlify Forms (zero setup when hosted on Netlify).
    *  - "endpoint": POSTs JSON to `endpoint` (e.g. a Formspree URL) — use this on Vercel.
+   *  - "kliniko": sends the request into Theori's Kliniko account (Waitlist → "From your website").
+   *    Switch to it only once Kliniko is cleared for real patient data, and after filling in
+   *    `kliniko.websiteKey` (Kliniko → Settings → Website requests). See README → "Kliniko".
    * In `npm run dev` submissions are simulated so you can test the flow.
    */
   booking: {
-    provider: "netlify" as "netlify" | "endpoint",
+    provider: "netlify" as "netlify" | "endpoint" | "kliniko",
     endpoint: "", // e.g. "https://formspree.io/f/xxxxxxx"
+    kliniko: {
+      /** Kliniko's Supabase project. */
+      supabaseUrl: "https://ztqhshhodphrfjomdwwf.supabase.co",
+      /** Kliniko's publishable key: public by design (it ships inside the Kliniko web app). */
+      publishableKey: "sb_publishable_8QPdgvkGLIzjOlAOZ2FHNg_AThbgGYH",
+      /** TODO: Theori's website key, copied from Kliniko → Settings → Website requests. */
+      websiteKey: "",
+    },
   },
 } as const;
 

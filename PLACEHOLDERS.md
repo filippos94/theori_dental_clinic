@@ -77,6 +77,13 @@ A dentist should review **both the English and Greek versions** of each, then se
 - [ ] **Greek text checked by a native speaker** (all of `el.json` plus the `.el.md` articles).
 - [ ] Hero headline: "Smile, you're in good hands." / "Χαμογελάστε, είστε σε καλά χέρια." OK?
 
+## L. Kliniko connection (optional, built but off)
+
+- [ ] Kliniko cleared for real patient data (backup tested, DPA signed): see Kliniko's `production-readiness.md`.
+- [ ] Kliniko pull request merged and migration 0104 applied to Kliniko's Supabase project.
+- [ ] Website key copied from Kliniko → Settings → Website requests into `booking.kliniko.websiteKey`, and `booking.provider` set to `"kliniko"`.
+- [ ] Privacy policy updated to name Kliniko/Supabase as processor of booking requests.
+
 ## K. After launch
 
 - [ ] Submit `https://<domain>/sitemap.xml` in Google Search Console.

@@ -19,10 +19,39 @@ function todayInCyprus() {
   return new Intl.DateTimeFormat("en-CA", { timeZone: clinic.timeZone }).format(new Date());
 }
 
+/**
+ * Sends the request into Theori's Kliniko account (Kliniko migration 0104,
+ * public_website_request). Kliniko answers {"ok": true} or {"error": code}.
+ */
+async function sendToKliniko(v: Fields & { serviceTitle: string; lang: string }) {
+  const k = clinic.booking.kliniko;
+  if (!k.websiteKey) throw new Error("kliniko_not_configured");
+  const res = await fetch(`${k.supabaseUrl}/rest/v1/rpc/public_website_request`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json", apikey: k.publishableKey },
+    body: JSON.stringify({
+      p_key: k.websiteKey,
+      p_name: v.name.trim(),
+      p_phone: v.phone.trim(),
+      p_email: v.email.trim() || null,
+      p_service: v.service ? v.serviceTitle : null,
+      p_date: v.date || null,
+      p_time: v.time,
+      p_message: v.message.trim() || null,
+      p_language: v.lang === "el" ? "el" : "en",
+      p_consent: v.consent,
+      p_trap: v["bot-field"] || null,
+    }),
+  });
+  const data = (await res.json().catch(() => null)) as { ok?: boolean; error?: string } | null;
+  if (!res.ok || !data?.ok) throw new Error(data?.error ?? String(res.status));
+}
+
 export function BookingForm({ s, lang, services }: { s: S; lang: string; services: { id: string; title: string }[] }) {
   const [f, setF] = useState<Fields>(empty);
   const [errors, setErrors] = useState<Errors>({});
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
+  const [errorKind, setErrorKind] = useState<"send" | "rateLimited">("send");
   const [minDate, setMinDate] = useState<string | undefined>(undefined);
   const summaryRef = useRef<HTMLDivElement>(null);
   const successRef = useRef<HTMLDivElement>(null);
@@ -51,7 +80,7 @@ export function BookingForm({ s, lang, services }: { s: S; lang: string; service
   function validate(v: Fields): Errors {
     const e: Errors = {};
     if (v.name.trim().length < 2) e.name = s.errors.name;
-    if (v.phone.replace(/[^\d]/g, "").length < 8 || !/^[+\d\s().-]+$/.test(v.phone.trim())) e.phone = s.errors.phone;
+    if (v.phone.replace(/[^\d]/g, "").length < 8 || v.phone.replace(/[^\d]/g, "").length > 15 || !/^[+\d\s().-]+$/.test(v.phone.trim())) e.phone = s.errors.phone;
     if (v.email && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.email.trim())) e.email = s.errors.email;
     if (v.date) {
       if (minDate && v.date < minDate) e.date = s.errors.date;
@@ -86,13 +115,16 @@ export function BookingForm({ s, lang, services }: { s: S; lang: string; service
         const body = new URLSearchParams({ "form-name": FORM_NAME, ...Object.fromEntries(Object.entries(payload).map(([k, v]) => [k, String(v)])) });
         const res = await fetch("/__forms.html", { method: "POST", headers: { "Content-Type": "application/x-www-form-urlencoded" }, body: body.toString() });
         if (!res.ok) throw new Error(String(res.status));
+      } else if (clinic.booking.provider === "kliniko") {
+        await sendToKliniko({ ...f, serviceTitle, lang });
       } else {
         const res = await fetch(clinic.booking.endpoint, { method: "POST", headers: { "Content-Type": "application/json", Accept: "application/json" }, body: JSON.stringify(payload) });
         if (!res.ok) throw new Error(String(res.status));
       }
       setStatus("sent");
       requestAnimationFrame(() => successRef.current?.focus());
-    } catch {
+    } catch (err) {
+      setErrorKind(err instanceof Error && err.message === "rate_limited" ? "rateLimited" : "send");
       setStatus("error");
     }
   }
@@ -133,22 +165,22 @@ export function BookingForm({ s, lang, services }: { s: S; lang: string; service
 
       <div ref={summaryRef} tabIndex={-1} className="outline-none sm:col-span-2" aria-live="assertive">
         {hasErrors && <p className="rounded-2xl bg-coral-50 p-3 font-semibold text-coral-700">{s.errors.summary}</p>}
-        {status === "error" && <p className="rounded-2xl bg-coral-50 p-3 font-semibold text-coral-700">{s.errors.send} <a className="underline" href={clinic.phone.href}>{clinic.phone.display}</a></p>}
+        {status === "error" && <p className="rounded-2xl bg-coral-50 p-3 font-semibold text-coral-700">{errorKind === "rateLimited" ? s.errors.rateLimited : s.errors.send} <a className="underline" href={clinic.phone.href}>{clinic.phone.display}</a></p>}
       </div>
 
       <div>
         <label htmlFor="name" className="field-label">{s.name} <span className="text-coral-700" aria-hidden="true">*</span><span className="sr-only">({s.required})</span></label>
-        <input id="name" name="name" className="field" autoComplete="name" required value={f.name} onChange={(e) => set("name", e.target.value)} {...err("name")} />
+        <input id="name" name="name" className="field" autoComplete="name" required maxLength={120} value={f.name} onChange={(e) => set("name", e.target.value)} {...err("name")} />
         <ErrorMsg k="name" />
       </div>
       <div>
         <label htmlFor="phone" className="field-label">{s.phone} <span className="text-coral-700" aria-hidden="true">*</span><span className="sr-only">({s.required})</span></label>
-        <input id="phone" name="phone" type="tel" inputMode="tel" className="field" autoComplete="tel" placeholder="+357 …" required value={f.phone} onChange={(e) => set("phone", e.target.value)} {...err("phone")} />
+        <input id="phone" name="phone" type="tel" inputMode="tel" className="field" autoComplete="tel" placeholder="+357 …" required maxLength={40} value={f.phone} onChange={(e) => set("phone", e.target.value)} {...err("phone")} />
         <ErrorMsg k="phone" />
       </div>
       <div>
         <label htmlFor="email" className="field-label">{s.email} <span className="font-normal text-ink-soft">({s.optional})</span></label>
-        <input id="email" name="email" type="email" inputMode="email" className="field" autoComplete="email" value={f.email} onChange={(e) => set("email", e.target.value)} {...err("email")} />
+        <input id="email" name="email" type="email" inputMode="email" className="field" autoComplete="email" maxLength={200} value={f.email} onChange={(e) => set("email", e.target.value)} {...err("email")} />
         <ErrorMsg k="email" />
       </div>
       <div>
@@ -178,7 +210,7 @@ export function BookingForm({ s, lang, services }: { s: S; lang: string; service
       </fieldset>
       <div className="sm:col-span-2">
         <label htmlFor="message" className="field-label">{s.message} <span className="font-normal text-ink-soft">({s.optional})</span></label>
-        <textarea id="message" name="message" rows={4} className="field resize-y" placeholder={s.messageHint} value={f.message} onChange={(e) => set("message", e.target.value)} />
+        <textarea id="message" name="message" rows={4} maxLength={1000} className="field resize-y" placeholder={s.messageHint} value={f.message} onChange={(e) => set("message", e.target.value)} />
       </div>
       <div className="sm:col-span-2">
         <label className="flex cursor-pointer items-start gap-3 rounded-xl bg-cream p-4">

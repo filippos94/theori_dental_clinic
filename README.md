@@ -137,6 +137,18 @@ Put source images in **`assets/photos/`** (JPG, PNG, WebP, AVIF or SVG). `npm ru
    booking: { provider: "endpoint", endpoint: "https://formspree.io/f/XXXXXXX" },
    ```
 
+### Connecting the booking form to Kliniko
+
+The form can send requests straight into Theori's **Kliniko** account (Kliniko → Waitlist → "From your website"), instead of by email. It is built and tested but **switched off**, because Kliniko's own `production-readiness.md` says it isn't cleared for real patient data yet (no tested backup, no signed data-processing agreement).
+
+To switch it on, once Kliniko is cleared:
+1. Make sure Kliniko migration `0104_website_requests.sql` is applied to Kliniko's Supabase project.
+2. In Kliniko, as the owner: **Settings → Website requests**, turn it on and copy the **website key**.
+3. In `src/config/clinic.ts`, set `booking.provider` to `"kliniko"` and paste the key into `booking.kliniko.websiteKey`. Push.
+4. Update the privacy policy: Kliniko (and its host, Supabase) now processes booking requests.
+
+If the key ever leaks or the site is retired, use **Replace key** in Kliniko: the old key stops working at once.
+
 ### Any other static host
 
 Upload the contents of `/out`. Make `/` redirect to `/en/` (the included `out/index.html` also redirects in the browser) and use `404.html` as the error page.

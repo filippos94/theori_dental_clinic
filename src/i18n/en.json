@@ -264,7 +264,8 @@
       "sunday": "We're closed on Sundays, please choose another day.",
       "afternoonClosed": "We're closed on Wednesday and Saturday afternoons, please pick the morning or another day.",
       "consent": "Please tick the box so we can contact you.",
-      "send": "Sorry, something went wrong sending your request. Please try again or call us."
+      "send": "Sorry, something went wrong sending your request. Please try again or call us.",
+      "rateLimited": "You've sent several requests already, please call us instead."
     },
     "successTitle": "Request received",
     "successText": "Thank you, {name}. We'll be in touch soon to confirm your appointment. If it's urgent, give us a call.",
