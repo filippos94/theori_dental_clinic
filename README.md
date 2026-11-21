@@ -115,7 +115,10 @@ Put source images in **`assets/photos/`** (JPG, PNG, WebP, AVIF or SVG). `npm ru
 
 ## 5. Deploy
 
-Before the first deploy, set **`siteUrl`** in `src/config/clinic.ts` to the real domain. Canonical URLs, hreflang, the sitemap and social images all depend on it.
+**Live now:** https://theori-dental.netlify.app (deployed from `main` on Netlify; every push redeploys automatically).
+
+- **`siteUrl`** in `src/config/clinic.ts` is the address used for canonical URLs, hreflang, the sitemap and social images. Change it when the clinic's own domain is connected.
+- **`allowSearchEngines`** is `false` while the site still has placeholder content: pages are `noindex` and `robots.txt` blocks crawlers. Set it to `true` at launch, then submit the sitemap in Google Search Console.
 
 ### Netlify (recommended: the booking form works with zero setup)
 

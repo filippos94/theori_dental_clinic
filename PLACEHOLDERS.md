@@ -4,7 +4,9 @@ While `showPlaceholderNotes: true` (in `src/config/clinic.ts`), every item below
 
 ## A. Clinic details: `src/config/clinic.ts`
 
-- [ ] **Website domain** (`siteUrl`): currently `https://www.theoridental.example`. **Must be set before launch** (it's used by the sitemap, canonical and social links).
+- [x] **Live site**: https://theori-dental.netlify.app (set as `siteUrl`).
+- [ ] **Own domain** (e.g. `theoridental.com`): connect it in Netlify → Domain management, then update `siteUrl`.
+- [ ] **Allow Google to index the site**: set `allowSearchEngines: true` once the placeholders below are replaced. Until then every page is marked "noindex" so sample content stays out of Google.
 - [ ] **Email address** (`email`): hidden until filled in.
 - [ ] **WhatsApp number** (`whatsapp`), international format without + or spaces, e.g. `35799123456`.
 - [ ] **Facebook URL** (`social.facebook`).

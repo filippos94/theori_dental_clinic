@@ -27,6 +27,7 @@ export const metadata: Metadata = {
   applicationName: clinic.name,
   icons: { icon: [{ url: "/favicon.svg", type: "image/svg+xml" }], apple: "/apple-touch-icon.png" },
   formatDetection: { telephone: true, address: true },
+  robots: clinic.allowSearchEngines ? { index: true, follow: true } : { index: false, follow: false },
   other: { "geo.region": "CY-06", "geo.placename": "Paphos", "geo.position": `${clinic.geo.lat};${clinic.geo.lng}`, ICBM: `${clinic.geo.lat}, ${clinic.geo.lng}` },
 };
 

@@ -13,8 +13,17 @@ export type Interval = { open: string; close: string }; // "HH:MM", 24h, Europe/
 export const clinic = {
   name: "Theori Dental Clinic",
 
-  /** TODO: set the real production domain (no trailing slash). Used for canonical URLs, sitemap, OG tags. */
-  siteUrl: "https://www.theoridental.example",
+  /**
+   * Live address of the site (no trailing slash). Used for canonical URLs, sitemap and social previews.
+   * TODO: change to the clinic's own domain (e.g. "https://www.theoridental.com") once it is connected in Netlify.
+   */
+  siteUrl: "https://theori-dental.netlify.app",
+
+  /**
+   * Search engines: while false, every page says "noindex" and robots.txt blocks crawlers, so Google
+   * doesn't index placeholder content (sample reviews, placeholder dentists). Set to true at launch.
+   */
+  allowSearchEngines: false,
 
   /**
    * While true, the site shows small "placeholder" badges on sample photos,
