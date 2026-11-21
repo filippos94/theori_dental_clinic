@@ -5,17 +5,20 @@
 [build.environment]
   NODE_VERSION = "22"
 
-# Language-aware redirect for the bare domain
+# Language-aware redirect for the bare domain.
+# force = true: redirect even though out/index.html exists (that file is only a JS fallback for other hosts).
 [[redirects]]
   from = "/"
   to = "/el/"
   status = 302
+  force = true
   conditions = { Language = ["el"] }
 
 [[redirects]]
   from = "/"
   to = "/en/"
   status = 302
+  force = true
 
 [[headers]]
   for = "/images/*"

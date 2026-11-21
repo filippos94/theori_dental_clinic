@@ -17,7 +17,7 @@ export const clinic = {
    * Live address of the site (no trailing slash). Used for canonical URLs, sitemap and social previews.
    * TODO: change to the clinic's own domain (e.g. "https://www.theoridental.com") once it is connected in Netlify.
    */
-  siteUrl: "https://theori-dental.netlify.app",
+  siteUrl: "https://theori-dental-clinic.netlify.app",
 
   /**
    * Search engines: while false, every page says "noindex" and robots.txt blocks crawlers, so Google

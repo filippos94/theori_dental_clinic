@@ -4,7 +4,7 @@ While `showPlaceholderNotes: true` (in `src/config/clinic.ts`), every item below
 
 ## A. Clinic details: `src/config/clinic.ts`
 
-- [x] **Live site**: https://theori-dental.netlify.app (set as `siteUrl`).
+- [x] **Live site**: https://theori-dental-clinic.netlify.app (set as `siteUrl`).
 - [ ] **Own domain** (e.g. `theoridental.com`): connect it in Netlify → Domain management, then update `siteUrl`.
 - [ ] **Allow Google to index the site**: set `allowSearchEngines: true` once the placeholders below are replaced. Until then every page is marked "noindex" so sample content stays out of Google.
 - [ ] **Email address** (`email`): hidden until filled in.
