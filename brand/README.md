@@ -9,7 +9,8 @@ All files are vector SVGs with the lettering converted to shapes. They need no f
 |---|---|
 | `theori-logo-horizontal.svg` | Primary logo (website header, letterhead, documents) |
 | `theori-logo-horizontal-white.svg` | On dark or photo backgrounds |
-| `theori-logo-horizontal-greek.svg` | Greek descriptor "ΟΔΟΝΤΙΑΤΡΕΙΟ" |
+| `theori-logo-horizontal-greek.svg` | Greek descriptor "ΟΔΟΝΤΙΑΤΡΕΙΟ" (used on the Greek pages) |
+| `theori-logo-horizontal-greek-white.svg` | Greek version for dark backgrounds |
 | `theori-logo-stacked.svg` | Square spaces, signage |
 | `theori-mark.svg` | App icon, social profile picture |
 | `theori-mark-outline.svg` | Mark only, teal line (light backgrounds) |

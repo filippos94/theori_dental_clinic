@@ -74,7 +74,7 @@ export function Header({ lang, s }: { lang: Locale; s: Strings }) {
       <header className={`sticky top-0 z-[70] transition-[background-color,border-color] duration-300 ${scrolled || open ? "border-b border-line bg-cream/85 backdrop-blur-md" : "border-b border-transparent bg-cream"}`}>
         <div className="container-x flex h-[4.5rem] items-center justify-between gap-3">
           <Link href={`/${lang}/`} className="shrink-0 rounded-2xl">
-            <Logo />
+            <Logo lang={lang} />
           </Link>
 
           <nav aria-label={s.a11y.mainNav} className="hidden xl:block">

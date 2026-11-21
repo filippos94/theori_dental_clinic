@@ -19,7 +19,7 @@ export function Footer({ lang }: { lang: Locale }) {
     <footer className="relative bg-ink pb-28 text-[#c9d6d8] md:pb-10">
       <div className="container-x grid gap-10 pt-16 sm:grid-cols-2 lg:grid-cols-4">
         <div>
-          <Logo inverted />
+          <Logo lang={lang} inverted />
           <p className="mt-4 max-w-xs">{d.footer.tagline}</p>
           <p className="mt-3 inline-flex items-center gap-1.5 font-semibold text-white">
             <Icon name="star" className="size-4 fill-current text-sun-400" strokeWidth={1.5} /> {clinic.google.rating.toFixed(1)} Google

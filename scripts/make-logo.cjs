@@ -73,6 +73,7 @@ const files = {
   "theori-logo-horizontal.svg": wrap(horizontal({ markOpts: { stroke: C.white, bg: C.teal }, wordColor: C.ink, subColor: C.soft }), T),
   "theori-logo-horizontal-white.svg": wrap(horizontal({ markOpts: { stroke: C.teal, bg: C.white }, wordColor: C.white, subColor: C.mist }), T),
   "theori-logo-horizontal-greek.svg": wrap(horizontal({ markOpts: { stroke: C.white, bg: C.teal }, wordColor: C.ink, subColor: C.soft, greek: true }), "Theori Οδοντιατρείο"),
+  "theori-logo-horizontal-greek-white.svg": wrap(horizontal({ markOpts: { stroke: C.teal, bg: C.white }, wordColor: C.white, subColor: C.mist, greek: true }), "Theori Οδοντιατρείο"),
   "theori-logo-stacked.svg": wrap(stacked({ markOpts: { stroke: C.white, bg: C.teal }, wordColor: C.ink, subColor: C.soft }), T),
   "theori-mark.svg": `<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 100 100" role="img" aria-label="${T}"><title>${T}</title>${mark({ stroke: C.white, bg: C.teal })}</svg>\n`,
   "theori-mark-outline.svg": `<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="12 8 76 80" role="img" aria-label="${T}"><title>${T}</title>${mark({ stroke: C.teal, sw: 4.6 })}</svg>\n`,

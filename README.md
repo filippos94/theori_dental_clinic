@@ -109,7 +109,7 @@ Put source images in **`assets/photos/`** (JPG, PNG, WebP, AVIF or SVG). `npm ru
 | `tip-*` | Blog covers | 16:10 / 16:9 |
 | `og-default` | Default social-share image | 1200×630 |
 
-**Logo:** the logo set lives in `brand/` (see `brand/README.md` and the brand guide `brand/brand-guide.html`). The site uses copies in `public/`: `logo.svg` (header), `logo-white.svg` (footer), `favicon.svg`, `apple-touch-icon.png` and `logo-mark.png` (Google structured data). To change the logo, replace those files with the same names.
+**Logo:** the logo set lives in `brand/` (see `brand/README.md` and the brand guide `brand/brand-guide.html`). The site uses copies in `public/`: `logo.svg` / `logo-el.svg` (header, English / Greek pages), `logo-white.svg` / `logo-el-white.svg` (footer), `favicon.svg`, `apple-touch-icon.png` and `logo-mark.png` (Google structured data). To change the logo, replace those files with the same names.
 
 ---
 
