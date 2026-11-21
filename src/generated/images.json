@@ -1,0 +1,98 @@
+{
+  "dentist-1": {
+    "width": 1600,
+    "height": 2000,
+    "widths": [
+      480,
+      800,
+      1200,
+      1600
+    ],
+    "placeholder": true,
+    "og": "/images/og/dentist-1.jpg"
+  },
+  "dentist-2": {
+    "width": 1600,
+    "height": 2000,
+    "widths": [
+      480,
+      800,
+      1200,
+      1600
+    ],
+    "placeholder": true,
+    "og": "/images/og/dentist-2.jpg"
+  },
+  "family": {
+    "width": 1600,
+    "height": 1200,
+    "widths": [
+      480,
+      800,
+      1200,
+      1600
+    ],
+    "placeholder": true,
+    "og": "/images/og/family.jpg"
+  },
+  "hero-family": {
+    "width": 1600,
+    "height": 1280,
+    "widths": [
+      480,
+      800,
+      1200,
+      1600
+    ],
+    "placeholder": true,
+    "og": "/images/og/hero-family.jpg"
+  },
+  "og-default": {
+    "width": 1600,
+    "height": 840,
+    "widths": [
+      480,
+      800,
+      1200,
+      1600
+    ],
+    "placeholder": true,
+    "og": "/images/og/og-default.jpg"
+  },
+  "tip-brushing": {
+    "width": 1600,
+    "height": 1000,
+    "widths": [
+      480,
+      800,
+      1200,
+      1600
+    ],
+    "placeholder": true,
+    "og": "/images/og/tip-brushing.jpg"
+  },
+  "tip-first-visit": {
+    "width": 1600,
+    "height": 1000,
+    "widths": [
+      480,
+      800,
+      1200,
+      1600
+    ],
+    "placeholder": true,
+    "og": "/images/og/tip-first-visit.jpg"
+  },
+  "tip-whitening": {
+    "width": 1600,
+    "height": 1000,
+    "widths": [
+      480,
+      800,
+      1200,
+      1600
+    ],
+    "placeholder": true,
+    "og": "/images/og/tip-whitening.jpg"
+  }
+}

@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Theori Dental Clinic, Paphos</title>
+  <meta name="robots" content="noindex">
+  <link rel="alternate" hreflang="en" href="/en/">
+  <link rel="alternate" hreflang="el" href="/el/">
+  <link rel="alternate" hreflang="x-default" href="/en/">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <script>
+    // Send Greek-language browsers to /el/, everyone else to /en/ (hosts also redirect server-side, see netlify.toml / vercel.json)
+    (function () {
+      var saved = null; try { saved = localStorage.getItem("theori-lang"); } catch (e) {}
+      var nav = ((navigator.languages && navigator.languages[0]) || navigator.language || "en").toLowerCase();
+      var lang = saved === "el" || saved === "en" ? saved : (nav.indexOf("el") === 0 ? "el" : "en");
+      location.replace("/" + lang + "/" + location.hash);
+    })();
+  </script>
+  <noscript><meta http-equiv="refresh" content="0; url=/en/"></noscript>
+</head>
+<body style="font-family:system-ui,sans-serif;background:#fffbf3;color:#17313b;text-align:center;padding:3rem 1rem">
+  <p><a href="/en/">English</a> · <a href="/el/" lang="el">Ελληνικά</a></p>
+</body>
+</html>

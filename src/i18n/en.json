@@ -1,0 +1,311 @@
+{
+  "meta": {
+    "homeTitle": "Theori Dental Clinic | Friendly Dentist in Paphos, Cyprus",
+    "homeDescription": "Friendly family dentist in Paphos. Check-ups, whitening, implants, children's dentistry and emergencies at Theori Dental Clinic. Rated 5.0★ on Google. Call +357 26 937970.",
+    "tipsTitle": "Dental Tips | Theori Dental Clinic, Paphos",
+    "tipsDescription": "Friendly, practical dental tips from your dentist in Paphos: brushing, kids' teeth, whitening and everyday care.",
+    "privacyTitle": "Privacy & Cookie Policy | Theori Dental Clinic",
+    "privacyDescription": "How Theori Dental Clinic in Paphos handles your personal data and cookies.",
+    "keywords": "dentist Paphos, Paphos dentist, dental clinic Paphos, family dentist Cyprus, children's dentist Paphos, teeth whitening Paphos, dental implants Paphos, emergency dentist Paphos"
+  },
+  "a11y": {
+    "skipToContent": "Skip to main content",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "mainNav": "Main navigation",
+    "languageSwitcher": "Change language",
+    "previous": "Previous",
+    "next": "Next",
+    "goToSlide": "Go to review {n}",
+    "external": "(opens in a new tab)"
+  },
+  "nav": {
+    "home": "Home",
+    "services": "Services",
+    "about": "About",
+    "tips": "Tips",
+    "reviews": "Reviews",
+    "contact": "Contact",
+    "book": "Book now",
+    "backHome": "Back to home"
+  },
+  "lang": {
+    "en": "English",
+    "el": "Ελληνικά",
+    "short": "EN",
+    "switchTo": "Ελληνικά"
+  },
+  "common": {
+    "call": "Call",
+    "book": "Book",
+    "placeholder": "Placeholder",
+    "placeholderPhoto": "Placeholder photo",
+    "toConfirm": "To be confirmed",
+    "minRead": "{n} min read",
+    "comingSoon": "coming soon"
+  },
+  "hero": {
+    "eyebrow": "Family dentist in Paphos",
+    "title": "Smile, you're in good hands.",
+    "subtitle": "Gentle, unhurried dental care for kids, grown-ups and everyone who's a little nervous about the dentist. We'll explain everything and go at your pace.",
+    "ctaBook": "Book an Appointment",
+    "ctaCall": "Call {phone}",
+    "googleBadge": "{rating} on Google",
+    "googleBadgeSub": "Read our reviews",
+    "imageAlt": "A smiling family"
+  },
+  "services": {
+    "title": "How we can help",
+    "subtitle": "From your six-monthly check-up to a brand-new smile. Tap a card to learn more.",
+    "placeholderNote": "Service list to be confirmed by the clinic.",
+    "bookThis": "Book this treatment",
+    "showMore": "Show details",
+    "showLess": "Hide details",
+    "items": {
+      "checkups": {
+        "title": "Check-ups & cleaning",
+        "short": "A friendly once-over and a fresh, polished feeling.",
+        "detail": "We check your teeth, gums and bite, take X-rays only when they're needed, and gently remove plaque and tartar. You'll leave with a fresh smile and simple tips for keeping it that way."
+      },
+      "whitening": {
+        "title": "Teeth whitening",
+        "short": "Safe, dentist-supervised brightening.",
+        "detail": "After a quick check that whitening suits your teeth, we'll talk through in-clinic and take-home options so you get a natural-looking result that's kind to your enamel."
+      },
+      "fillings": {
+        "title": "Fillings",
+        "short": "Tooth-coloured repairs that blend right in.",
+        "detail": "Small cavities are repaired with tooth-coloured composite material, matched to your shade. We numb the area first and check in with you throughout."
+      },
+      "rootCanal": {
+        "title": "Root canal treatment",
+        "short": "Saving sore teeth, comfortably.",
+        "detail": "When the inside of a tooth is infected, a root canal treatment removes the infection and saves the tooth. Modern techniques and good anaesthetic make it far more comfortable than its reputation."
+      },
+      "crowns": {
+        "title": "Crowns & bridges",
+        "short": "Strong, natural-looking restorations.",
+        "detail": "Crowns protect weak or heavily filled teeth, and bridges replace a missing tooth by anchoring to its neighbours. We'll help you choose the right material and shade."
+      },
+      "implants": {
+        "title": "Dental implants",
+        "short": "A long-lasting way to replace missing teeth.",
+        "detail": "An implant is a small titanium post that acts like a tooth root and supports a natural-looking crown. We'll plan every step with you and explain timings and costs before we start."
+      },
+      "cosmetic": {
+        "title": "Cosmetic dentistry",
+        "short": "Small changes, big confidence.",
+        "detail": "From bonding chipped edges to veneers and smile makeovers, we'll listen to what you'd like to change and suggest options that look like you, only brighter."
+      },
+      "kids": {
+        "title": "Children's dentistry",
+        "short": "Fun, gentle visits that build happy habits.",
+        "detail": "We keep children's visits short, playful and positive, with plenty of praise. Check-ups, fluoride, fissure sealants and lots of brushing tips for parents too."
+      },
+      "emergency": {
+        "title": "Dental emergencies",
+        "short": "Toothache or accident? Call us today.",
+        "detail": "Severe pain, swelling, a broken tooth or a knocked-out tooth: call us as early as possible and we'll do our best to see you the same day during opening hours."
+      }
+    }
+  },
+  "family": {
+    "title": "For the whole family",
+    "subtitle": "Little ones, big ones and everyone in between.",
+    "kidsTitle": "Kids love it here",
+    "kidsText": "We turn the first visits into a little adventure: a ride in the big chair, counting teeth, a sticker at the end. No rush, no scary words.",
+    "nervousTitle": "Nervous? You're not alone",
+    "nervousText": "Tell us how you feel and we'll take it slowly. We explain every step before we do it, and you can raise a hand to pause at any time.",
+    "points": [
+      "Gentle, unhurried appointments",
+      "Everything explained in plain language",
+      "Raise a hand to pause, any time",
+      "Family appointments back-to-back"
+    ],
+    "imageAlt": "A parent and child smiling together"
+  },
+  "team": {
+    "title": "Meet the team",
+    "subtitle": "The friendly faces who'll look after your smile.",
+    "placeholderNote": "Dentist names, qualifications, bios and photos to be supplied by the clinic.",
+    "photoAlt": "Portrait of {name}",
+    "members": {
+      "dentist1": {
+        "role": "General & Family Dentist",
+        "bio": "[Placeholder bio] Loves seeing nervous patients leave with a smile, and has a soft spot for first visits with little ones."
+      },
+      "dentist2": {
+        "role": "Cosmetic & Restorative Dentistry",
+        "bio": "[Placeholder bio] Passionate about natural-looking results and explaining every option clearly, so you can decide with confidence."
+      }
+    }
+  },
+  "tips": {
+    "title": "Dental tips",
+    "subtitle": "Small habits, healthier smiles. Friendly advice from our team.",
+    "seeAll": "See all tips",
+    "readMore": "Read tip",
+    "listTitle": "Dental tips",
+    "listIntro": "Simple, practical advice for healthy teeth at every age.",
+    "filterLabel": "Filter by topic",
+    "all": "All",
+    "noResults": "No tips in this topic yet. Check back soon!",
+    "draftBadge": "Draft",
+    "draftNote": "Draft article: to be reviewed by the dentist before publishing.",
+    "publishedOn": "Published",
+    "ctaTitle": "Time for a check-up?",
+    "ctaText": "We'd love to see your smile. Book a relaxed check-up and clean.",
+    "ctaButton": "Book a check-up",
+    "related": "More tips you might like",
+    "tags": {
+      "daily-care": "Daily care",
+      "kids": "Kids",
+      "whitening": "Whitening",
+      "cosmetic": "Cosmetic"
+    }
+  },
+  "reviews": {
+    "title": "Kind words from our patients",
+    "subtitle": "Rated {rating}★ on Google",
+    "placeholderNote": "Sample reviews: replace with real Google reviews (with the patients' permission) before going live.",
+    "readOnGoogle": "Read our reviews on Google",
+    "carouselLabel": "Patient reviews",
+    "items": [
+      { "name": "[Sample] Maria K.", "text": "I've always been nervous at the dentist, but the team explained everything and were so patient. I actually look forward to my check-ups now!" },
+      { "name": "[Sample] James P.", "text": "Brought my two kids for their first visit. They came out grinning with stickers and asked when they can go back. Brilliant." },
+      { "name": "[Sample] Eleni A.", "text": "Had a toothache on a Monday morning and they fitted me in the same day. Friendly, professional and very clear about the costs." },
+      { "name": "[Sample] Andreas C.", "text": "Lovely bright clinic, no waiting around, and my teeth have never felt cleaner. Highly recommend." }
+    ]
+  },
+  "faq": {
+    "title": "Questions? We've got answers",
+    "subtitle": "Can't find what you're looking for? Just give us a call.",
+    "placeholderNote": "Answers marked [confirm] need checking by the clinic.",
+    "items": [
+      { "q": "What happens at my first visit?", "a": "We'll say hello, ask about your health and any worries, then do a gentle check of your teeth and gums. If X-rays are needed we'll explain why. Before anything else happens, we talk you through what we found and your options. No surprises." },
+      { "q": "From what age should my child see a dentist?", "a": "We recommend a first visit around your child's first birthday, or when the first teeth appear. Early, relaxed visits help children feel at home at the dentist." },
+      { "q": "How can I pay?", "a": "[confirm] We accept cash and card. We'll always give you a clear cost estimate before treatment. Please ask us about payment for larger treatment plans and about insurance." },
+      { "q": "What should I do in a dental emergency?", "a": "Call us on +357 26 937970 as early as possible. We keep time aside for emergencies and will do our best to see you the same day during opening hours. If a tooth is knocked out, keep it moist in milk and call straight away." },
+      { "q": "Is there parking nearby?", "a": "[confirm] Yes, there is street parking close to the clinic on Nikolaou Nikolaidi Avenue. Tap \"Get directions\" below for a route." },
+      { "q": "Which languages do you speak?", "a": "[confirm] Our team speaks Greek and English, so you can ask anything in the language you're most comfortable with." }
+    ]
+  },
+  "book": {
+    "title": "Book an appointment",
+    "subtitle": "Tell us a little about what you need and when suits you. We'll get back to you to confirm.",
+    "orCall": "Prefer to talk? Call us on",
+    "name": "Your name",
+    "phone": "Phone number",
+    "email": "Email",
+    "optional": "optional",
+    "service": "What can we help with?",
+    "servicePlaceholder": "Choose a treatment",
+    "serviceNotSure": "Not sure / general question",
+    "date": "Preferred date",
+    "time": "Preferred time",
+    "timeAny": "Any time",
+    "timeMorning": "Morning (08:00–13:00)",
+    "timeAfternoon": "Afternoon (14:00–19:00)",
+    "message": "Anything we should know?",
+    "messageHint": "e.g. toothache, nervous patient, booking for a child",
+    "consent": "I agree that Theori Dental Clinic may use these details to contact me about my appointment, as described in the",
+    "privacyLink": "privacy policy",
+    "submit": "Send request",
+    "sending": "Sending…",
+    "required": "required",
+    "errors": {
+      "summary": "Please check the highlighted fields.",
+      "name": "Please tell us your name.",
+      "phone": "Please enter a phone number we can reach you on.",
+      "email": "That email doesn't look quite right.",
+      "date": "Please choose a date from today onwards.",
+      "sunday": "We're closed on Sundays, please choose another day.",
+      "afternoonClosed": "We're closed on Wednesday and Saturday afternoons, please pick the morning or another day.",
+      "consent": "Please tick the box so we can contact you.",
+      "send": "Sorry, something went wrong sending your request. Please try again or call us."
+    },
+    "successTitle": "Yay, request received!",
+    "successText": "Thank you, {name}. We'll be in touch soon to confirm your appointment. If it's urgent, give us a call.",
+    "successAgain": "Send another request"
+  },
+  "contact": {
+    "title": "Come and see us",
+    "subtitle": "We're on Nikolaou Nikolaidi Avenue in the heart of Paphos.",
+    "address": "Address",
+    "phone": "Phone",
+    "email": "Email",
+    "whatsapp": "WhatsApp",
+    "directions": "Get directions",
+    "openInMaps": "Open in Google Maps",
+    "hoursTitle": "Opening hours",
+    "today": "Today",
+    "closed": "Closed",
+    "openNow": "Open now",
+    "openUntil": "Open now · until {time}",
+    "closedNow": "Closed now",
+    "opensAt": "Closed · opens at {time}",
+    "opensOn": "Closed · opens {day} at {time}",
+    "lunch": "Lunch break · back at {time}",
+    "timezoneNote": "Times shown in Cyprus time.",
+    "mapTitle": "Map showing Theori Dental Clinic in Paphos",
+    "mapConsentTitle": "Map loads from Google",
+    "mapConsentText": "Google Maps may set cookies and receive your IP address. Load the map only if you're happy with that.",
+    "mapConsentButton": "Load map",
+    "days": {
+      "mon": "Monday",
+      "tue": "Tuesday",
+      "wed": "Wednesday",
+      "thu": "Thursday",
+      "fri": "Friday",
+      "sat": "Saturday",
+      "sun": "Sunday"
+    }
+  },
+  "footer": {
+    "tagline": "Friendly family dentistry in Paphos.",
+    "hours": "Hours",
+    "contact": "Contact",
+    "follow": "Follow us",
+    "privacy": "Privacy policy",
+    "cookies": "Cookie notice",
+    "cookieSettings": "Cookie settings",
+    "rights": "All rights reserved.",
+    "weekdays": "Mon, Tue, Thu, Fri",
+    "wed": "Wednesday",
+    "sat": "Saturday",
+    "sun": "Sunday"
+  },
+  "cookies": {
+    "title": "A quick word about cookies 🍪",
+    "text": "We only use essential storage to make this site work. With your OK, we'll also load Google Maps, which may set its own cookies.",
+    "accept": "Accept all",
+    "reject": "Essential only",
+    "customise": "Choose",
+    "save": "Save choices",
+    "necessary": "Essential",
+    "necessaryDesc": "Remembers your cookie choice. Always on.",
+    "media": "Google Maps",
+    "mediaDesc": "Shows the interactive map in the contact section.",
+    "learnMore": "Read the cookie notice"
+  },
+  "privacy": {
+    "title": "Privacy & cookie policy",
+    "draftNote": "Template text: to be reviewed by the clinic (and ideally a legal adviser) before going live.",
+    "updated": "Last updated: [date]",
+    "sections": [
+      { "h": "Who we are", "p": "Theori Dental Clinic, Leoforos Nikolaou I. Nikolaidi 19, Paphos 8010, Cyprus, is the controller of the personal data collected through this website. You can contact us on +357 26 937970 [or by email: to be added]." },
+      { "h": "What we collect", "p": "When you send an appointment request we receive your name, phone number, email address (if given), the treatment you are interested in, your preferred date and time and any message you write. Please don't include detailed medical information in the form; we'll discuss that with you in person." },
+      { "h": "Why we use it", "p": "We use these details only to contact you about your appointment request (legal basis: your consent and steps prior to providing care). We do not sell your data or use it for marketing." },
+      { "h": "How long we keep it", "p": "Appointment requests are deleted after [X months] unless you become a patient, in which case your records are kept in line with Cypriot health record regulations." },
+      { "h": "Who else sees it", "p": "Form submissions are processed by our website hosting provider [Netlify / Formspree: confirm] on our behalf, under a data-processing agreement." },
+      { "h": "Your rights", "p": "You can ask to see, correct or delete your data, withdraw consent at any time, and complain to the Commissioner for Personal Data Protection in Cyprus (dataprotection.gov.cy)." }
+    ],
+    "cookiesTitle": "Cookie notice",
+    "cookiesText": "This site uses your browser's local storage to remember your cookie choice (essential). If you allow it, the contact section loads an interactive Google Maps map, and Google may set cookies and process your IP address under its own privacy policy. We do not use analytics or advertising cookies. You can change your choice at any time with the button below or the \"Cookie settings\" link in the footer."
+  },
+  "notFound": {
+    "title": "Oops, this page is missing a tooth!",
+    "text": "We couldn't find that page.",
+    "home": "Take me home"
+  }
+}
