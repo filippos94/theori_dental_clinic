@@ -356,7 +356,7 @@
       },
       {
         "h": "Who else sees it",
-        "p": "Form submissions are processed by our website hosting provider [Netlify / Formspree: confirm] on our behalf, under a data-processing agreement."
+        "p": "Appointment requests sent through the website form are delivered to us by email by Formspree (Formspree, Inc.), which processes them on our behalf under a data-processing agreement [confirm the DPA is in place]. Formspree is based in the USA; transfers rely on the safeguards in its DPA."
       },
       {
         "h": "Your rights",

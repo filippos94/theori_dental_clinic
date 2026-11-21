@@ -124,7 +124,7 @@ Put source images in **`assets/photos/`** (JPG, PNG, WebP, AVIF or SVG). `npm ru
 
 1. Push this folder to a GitHub/GitLab repository.
 2. In Netlify, choose **Add new site → Import an existing project**, then pick the repo. `netlify.toml` already sets the build command (`npm run build`), the publish folder (`out`), the language redirect, cache headers and security headers.
-3. Booking requests then appear under **Site → Forms → booking**. Turn on email notifications under **Forms → Form notifications**.
+3. Booking requests are emailed by **Formspree** (`booking.provider = "formspree"`): set `booking.formspreeUrl` in `src/config/clinic.ts` to your form's address. (Netlify Forms is still supported: set the provider to `"netlify"`.)
    - The form is detected through `public/__forms.html`. Keep that file, and keep its field names in sync if you change the form.
 4. Add your domain under **Domain management**.
 

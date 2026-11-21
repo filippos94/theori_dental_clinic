@@ -20,6 +20,35 @@ function todayInCyprus() {
 }
 
 /**
+ * Emails the request to the clinic through Formspree. Field names are what
+ * the clinic sees in the email, so they are written for people. "email" is
+ * kept as is so Formspree sets it as the reply-to address.
+ */
+async function sendToFormspree(v: Fields & { serviceTitle: string; lang: string }, s: S) {
+  const url = clinic.booking.formspreeUrl;
+  if (!url) throw new Error("formspree_not_configured");
+  const time = { any: s.timeAny, morning: s.timeMorning, afternoon: s.timeAfternoon }[v.time as "any" | "morning" | "afternoon"] ?? v.time;
+  const res = await fetch(url, {
+    method: "POST",
+    headers: { "Content-Type": "application/json", Accept: "application/json" },
+    body: JSON.stringify({
+      _subject: `New appointment request: ${v.name.trim()}`,
+      _gotcha: v["bot-field"],
+      Name: v.name.trim(),
+      Phone: v.phone.trim(),
+      email: v.email.trim() || undefined,
+      Treatment: v.service ? v.serviceTitle : "—",
+      "Preferred date": v.date || "—",
+      "Preferred time": time,
+      Message: v.message.trim() || "—",
+      Language: v.lang === "el" ? "Ελληνικά (Greek)" : "English",
+      Consent: "Agreed to be contacted under the privacy policy",
+    }),
+  });
+  if (!res.ok) throw new Error(String(res.status));
+}
+
+/**
  * Sends the request into Theori's Kliniko account (Kliniko migration 0104,
  * public_website_request). Kliniko answers {"ok": true} or {"error": code}.
  */
@@ -115,6 +144,8 @@ export function BookingForm({ s, lang, services }: { s: S; lang: string; service
         const body = new URLSearchParams({ "form-name": FORM_NAME, ...Object.fromEntries(Object.entries(payload).map(([k, v]) => [k, String(v)])) });
         const res = await fetch("/__forms.html", { method: "POST", headers: { "Content-Type": "application/x-www-form-urlencoded" }, body: body.toString() });
         if (!res.ok) throw new Error(String(res.status));
+      } else if (clinic.booking.provider === "formspree") {
+        await sendToFormspree({ ...f, serviceTitle, lang }, s);
       } else if (clinic.booking.provider === "kliniko") {
         await sendToKliniko({ ...f, serviceTitle, lang });
       } else {

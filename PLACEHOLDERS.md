@@ -13,7 +13,7 @@ While `showPlaceholderNotes: true` (in `src/config/clinic.ts`), every item below
 - [ ] **Instagram URL** (`social.instagram`).
 - [ ] **Confirm opening hours** (taken from Google Maps): Mon/Tue/Thu/Fri 08:00–13:00 & 14:00–19:00 · Wed 08:00–13:00 · Sat 08:00–13:00 · Sun closed.
 - [ ] **Confirm address**: Leoforos Nikolaou I. Nikolaidi 19, Paphos 8010 (Greek: Λεωφ. Νικ. Ι. Νικολαΐδη 19, Πάφος 8010).
-- [ ] **Booking form delivery**: Netlify Forms (default) or a Formspree endpoint (Vercel). Decide who receives the notification emails.
+- [ ] **Booking form delivery: Formspree.** Create the form at formspree.io with the clinic's email, then put its address in `booking.formspreeUrl` (e.g. `https://formspree.io/f/abcd1234`). Until then the form shows an error and asks visitors to call.
 
 ## B. Logo & icons
 
