@@ -15,8 +15,8 @@ While `showPlaceholderNotes: true` (in `src/config/clinic.ts`), every item below
 
 ## B. Logo & icons
 
-- [ ] **Logo** (SVG preferred, plus a PNG). It replaces the placeholder wordmark in `src/components/Logo.tsx`.
-- [ ] **Favicon** (`public/favicon.svg`) and **Apple touch icon** (`public/apple-touch-icon.png`, 180×180). They can be made from the logo.
+- [ ] **Approve the logo.** A proposal (tooth + Θ-smile mark) is now live on the site; see `brand/`. If the clinic already has a logo, replace the files listed in the README's "Logo" note.
+- [x] Favicon and Apple touch icon made from the proposed logo.
 
 ## C. Services: `clinic.services` + `services.items` in `src/i18n/*.json`
 

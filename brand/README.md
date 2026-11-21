@@ -22,4 +22,4 @@ All files are vector SVGs with the lettering converted to shapes. They need no f
 
 **Minimum sizes:** full logo 120 px / 30 mm wide; mark alone 16 px / 6 mm. Don't stretch, recolour or add effects.
 
-> Status: **proposal**. The website still uses its placeholder logo until this one is approved.
+> Status: **in use on the website** (header, footer, favicon, social share image). Still awaiting the clinic's approval.

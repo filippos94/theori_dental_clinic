@@ -54,7 +54,7 @@ export default async function TipPage({ params }: P) {
     inLanguage: lang,
     mainEntityOfPage: { "@type": "WebPage", "@id": url },
     author: post.author ? { "@type": "Person", name: post.author } : { "@type": "Organization", name: clinic.name, url: absoluteUrl(`/${lang}/`) },
-    publisher: { "@type": "Organization", name: clinic.name, logo: { "@type": "ImageObject", url: absoluteUrl("/apple-touch-icon.png") } },
+    publisher: { "@type": "Organization", name: clinic.name, logo: { "@type": "ImageObject", url: absoluteUrl("/logo-mark.png"), width: 512, height: 512 } },
     keywords: post.tags.map((tg) => tagLabels[tg] ?? tg).join(", "),
   };
   const breadcrumbLd = {

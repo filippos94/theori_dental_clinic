@@ -62,7 +62,7 @@ export function dentistJsonLd(lang: Locale, description: string) {
     telephone: clinic.phone.e164,
     ...(clinic.email ? { email: clinic.email } : {}),
     image: absoluteUrl(getImage("og-default")?.og ?? "/favicon.svg"),
-    logo: absoluteUrl("/favicon.svg"),
+    logo: absoluteUrl("/logo-mark.png"),
     address: {
       "@type": "PostalAddress",
       streetAddress: clinic.address.street[lang],

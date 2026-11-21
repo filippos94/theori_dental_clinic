@@ -4,7 +4,6 @@ import "@fontsource-variable/inter/wght.css";
 import "./globals.css";
 import en from "@/i18n/en.json";
 import el from "@/i18n/el.json";
-import { ToothMark } from "@/components/Illustrations";
 
 export const metadata: Metadata = { title: "404 | Theori Dental Clinic", robots: { index: false } };
 
@@ -14,7 +13,7 @@ export default function GlobalNotFound() {
     <html lang="en">
       <body className="grid min-h-dvh place-items-center bg-cream p-6 text-center">
         <main className="relative max-w-xl">
-          <ToothMark className="mx-auto size-12 text-aqua-700" />
+          <img src="/logo.svg" alt="Theori Dental Clinic" width={164} height={40} className="mx-auto h-10 w-auto" />
           <p className="mt-4 font-display text-7xl font-bold tracking-tighter text-aqua-700">404</p>
           <h1 className="mt-4 text-3xl sm:text-4xl">{en.notFound.title}</h1>
           <p className="lead mt-2">{en.notFound.text}</p>
