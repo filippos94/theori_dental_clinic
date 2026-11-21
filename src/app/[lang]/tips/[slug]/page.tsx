@@ -9,7 +9,6 @@ import { getImage } from "@/lib/images";
 import { Picture } from "@/components/Picture";
 import { TipCard, tagColor } from "@/components/TipCard";
 import { Icon } from "@/components/Icon";
-import { ToothMascot, Sparkle } from "@/components/Illustrations";
 import { JsonLd } from "@/components/JsonLd";
 
 export const dynamicParams = false;
@@ -73,13 +72,14 @@ export default async function TipPage({ params }: P) {
       <JsonLd data={articleLd} />
       <JsonLd data={breadcrumbLd} />
       <article>
-        <header className="bg-aqua-50">
+        <header className="border-b border-line bg-cream">
           <div className="container-x pb-10 pt-8 sm:pt-10">
             <nav aria-label="Breadcrumb" className="flex flex-wrap items-center gap-2 text-sm font-bold">
-              <Link href={`/${lang}/`} className="inline-flex min-h-11 items-center gap-1.5 rounded-full bg-white px-4 text-aqua-800 shadow-sm hover:bg-aqua-100">
+              <Link href={`/${lang}/`} className="inline-flex min-h-11 items-center gap-1.5 text-ink-soft hover:text-ink">
                 <Icon name="arrowLeft" className="size-4" /> {d.nav.backHome}
               </Link>
-              <Link href={`/${lang}/tips/`} className="inline-flex min-h-11 items-center rounded-full px-3 text-aqua-800 hover:underline">{d.tips.listTitle}</Link>
+              <span aria-hidden="true" className="text-line">/</span>
+              <Link href={`/${lang}/tips/`} className="inline-flex min-h-11 items-center text-ink-soft hover:text-ink">{d.tips.listTitle}</Link>
             </nav>
 
             <div className="mx-auto mt-6 max-w-3xl text-center">
@@ -89,13 +89,13 @@ export default async function TipPage({ params }: P) {
                   <Link key={tg} href={`/${lang}/tips/#tag=${tg}`} className={`pill ${tagColor(tg)} hover:brightness-95`}>{tagLabels[tg] ?? tg}</Link>
                 ))}
               </div>
-              <h1 className="mt-4 text-[clamp(2rem,1.4rem+2.8vw,3.4rem)]">{post.title}</h1>
-              <p className="mt-4 flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-ink-soft">
-                <span className="inline-flex items-center gap-1.5"><Icon name="calendar" className="size-5 text-aqua-700" /><span className="sr-only">{d.tips.publishedOn}</span><time dateTime={post.date}>{date}</time></span>
-                <span className="inline-flex items-center gap-1.5"><Icon name="clock" className="size-5 text-aqua-700" />{t(d.common.minRead, { n: post.readTime })}</span>
+              <h1 className="mt-5 text-[clamp(2.1rem,1.4rem+3vw,3.6rem)] leading-[1.06] tracking-[-0.035em]">{post.title}</h1>
+              <p className="mt-5 flex flex-wrap items-center justify-center gap-x-5 gap-y-1 text-sm text-ink-soft">
+                <span className="inline-flex items-center gap-1.5"><Icon name="calendar" className="size-4" /><span className="sr-only">{d.tips.publishedOn}</span><time dateTime={post.date}>{date}</time></span>
+                <span className="inline-flex items-center gap-1.5"><Icon name="clock" className="size-4" />{t(d.common.minRead, { n: post.readTime })}</span>
               </p>
             </div>
-            <div className="mx-auto mt-8 max-w-4xl overflow-hidden rounded-[2rem] border-[6px] border-white shadow-[var(--shadow-soft)]">
+            <div className="mx-auto mt-10 max-w-5xl overflow-hidden rounded-[2rem]">
               <Picture name={post.cover} alt={post.coverAlt} priority sizes="(min-width: 1024px) 896px, 94vw" className="aspect-[16/9]" />
             </div>
           </div>
@@ -105,25 +105,23 @@ export default async function TipPage({ params }: P) {
           <div className="article-body" dangerouslySetInnerHTML={{ __html: post.html }} />
 
           {/* Call to action */}
-          <aside className="relative mx-auto mt-14 max-w-3xl overflow-hidden rounded-[2rem] bg-sun-100 p-8 text-center sm:p-10" aria-labelledby="cta-title">
-            <Sparkle className="absolute left-6 top-6 size-8 motion-safe:animate-float" color="#FF8A75" />
-            <Sparkle className="absolute bottom-8 right-8 size-6 motion-safe:animate-float" color="#16AFC4" />
-            <ToothMascot className="mx-auto size-20" mood="wink" />
-            <h2 id="cta-title" className="mt-3 text-2xl sm:text-3xl">{d.tips.ctaTitle}</h2>
-            <p className="mx-auto mt-2 max-w-md text-ink-soft">{d.tips.ctaText}</p>
-            <div className="mt-6 flex flex-wrap justify-center gap-3">
-              <span className="wiggle"><Link href={`/${lang}/#book`} className="btn btn-book"><Icon name="calendar" className="size-5" /> {d.tips.ctaButton}</Link></span>
-              <a href={clinic.phone.href} className="btn btn-primary"><Icon name="phone" className="size-5" /> {clinic.phone.display}</a>
+          <aside className="relative mx-auto mt-16 max-w-3xl overflow-hidden rounded-[2rem] bg-ink p-8 text-white sm:p-12" aria-labelledby="cta-title">
+            <div aria-hidden="true" className="pointer-events-none absolute -right-24 -top-24 size-72 rounded-full bg-[radial-gradient(closest-side,rgba(93,179,181,0.45),transparent)]" />
+            <h2 id="cta-title" className="relative text-2xl sm:text-3xl">{d.tips.ctaTitle}</h2>
+            <p className="relative mt-3 max-w-md text-[#c9d6d8]">{d.tips.ctaText}</p>
+            <div className="relative mt-8 flex flex-wrap gap-3">
+              <Link href={`/${lang}/#book`} className="btn bg-white text-ink hover:bg-aqua-50">{d.tips.ctaButton} <Icon name="arrowRight" className="size-4" /></Link>
+              <a href={clinic.phone.href} className="btn text-white ring-1 ring-white/25 hover:ring-white/60"><Icon name="phone" className="size-4" /> {clinic.phone.display}</a>
             </div>
           </aside>
         </div>
       </article>
 
       {related.length > 0 && (
-        <section aria-labelledby="related-title" className="bg-mint-50">
+        <section aria-labelledby="related-title" className="border-t border-line bg-cream">
           <div className="container-x py-14 sm:py-16">
-            <h2 id="related-title" className="h-section mb-8 text-center">{d.tips.related}</h2>
-            <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <h2 id="related-title" className="h-section mb-10">{d.tips.related}</h2>
+            <ul className="grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
               {related.map((p) => <li key={p.slug}><TipCard post={p} /></li>)}
             </ul>
           </div>

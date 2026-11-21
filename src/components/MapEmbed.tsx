@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import { readConsent, writeConsent, onConsentChange } from "@/lib/consent";
 import { clinic } from "@/config/clinic";
 import { Icon } from "./Icon";
-import { ToothMascot } from "./Illustrations";
 
 type S = { mapTitle: string; mapConsentTitle: string; mapConsentText: string; mapConsentButton: string; openInMaps: string };
 
@@ -16,7 +15,7 @@ export function MapEmbed({ s }: { s: S }) {
   }, []);
 
   return (
-    <div className="relative aspect-[4/3] w-full overflow-hidden rounded-[1.75rem] bg-aqua-100 shadow-[var(--shadow-soft)] sm:aspect-[16/10] lg:aspect-auto lg:h-full lg:min-h-[26rem]">
+    <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl border border-line bg-aqua-50 sm:aspect-[16/10] lg:aspect-auto lg:h-full lg:min-h-[26rem]">
       {allowed ? (
         <iframe
           title={s.mapTitle}
@@ -27,13 +26,12 @@ export function MapEmbed({ s }: { s: S }) {
           allowFullScreen
         />
       ) : (
-        <div className="absolute inset-0 grid place-items-center bg-[radial-gradient(circle_at_30%_20%,#fff3c4_0,transparent_45%),radial-gradient(circle_at_80%_80%,#ddf5ea_0,transparent_45%)] p-6 text-center">
+        <div className="absolute inset-0 grid place-items-center bg-[linear-gradient(#dceded_1px,transparent_1px),linear-gradient(90deg,#dceded_1px,transparent_1px)] bg-[size:32px_32px] p-6 text-center">
           <div className="max-w-sm">
-            <div className="relative mx-auto mb-3 grid size-20 place-items-center rounded-full bg-white shadow-[var(--shadow-soft)]">
-              <Icon name="pin" className="size-10 text-coral-700" />
-              <ToothMascot className="absolute -right-4 -bottom-2 size-10" />
+            <div className="mx-auto mb-4 grid size-14 place-items-center rounded-full bg-ink text-white shadow-[var(--shadow-pop)]">
+              <Icon name="pin" className="size-6" />
             </div>
-            <p className="font-display text-lg font-extrabold text-ink">{s.mapConsentTitle}</p>
+            <p className="font-display text-lg font-semibold text-ink">{s.mapConsentTitle}</p>
             <p className="mt-1 text-sm text-ink-soft">{s.mapConsentText}</p>
             <div className="mt-4 flex flex-wrap justify-center gap-2">
               <button type="button" className="btn btn-primary" onClick={() => writeConsent(true)}>{s.mapConsentButton}</button>

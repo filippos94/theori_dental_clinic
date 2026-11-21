@@ -1,10 +1,6 @@
 import type { Metadata, Viewport } from "next";
-import "@fontsource/m-plus-rounded-1c/latin-700.css";
-import "@fontsource/m-plus-rounded-1c/latin-800.css";
-import "@fontsource/m-plus-rounded-1c/latin-ext-800.css";
-import "@fontsource/m-plus-rounded-1c/greek-700.css";
-import "@fontsource/m-plus-rounded-1c/greek-800.css";
-import "@fontsource-variable/noto-sans/wght.css";
+import "@fontsource-variable/manrope/wght.css";
+import "@fontsource-variable/inter/wght.css";
 import "../globals.css";
 import { notFound } from "next/navigation";
 import { clinic } from "@/config/clinic";
@@ -21,7 +17,7 @@ export function generateStaticParams() {
 }
 
 export const viewport: Viewport = {
-  themeColor: "#fffbf3",
+  themeColor: "#fafaf7",
   width: "device-width",
   initialScale: 1,
 };

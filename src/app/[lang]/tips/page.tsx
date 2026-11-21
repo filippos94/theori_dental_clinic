@@ -6,7 +6,6 @@ import { pageMetadata, absoluteUrl } from "@/lib/seo";
 import { TipCard } from "@/components/TipCard";
 import { TipsFilter } from "@/components/TipsFilter";
 import { Icon } from "@/components/Icon";
-import { Sparkle, ToothMascot } from "@/components/Illustrations";
 import { JsonLd } from "@/components/JsonLd";
 
 export async function generateMetadata({ params }: { params: Promise<{ lang: Locale }> }): Promise<Metadata> {
@@ -33,21 +32,19 @@ export default async function TipsPage({ params }: { params: Promise<{ lang: Loc
           blogPost: posts.map((p) => ({ "@type": "BlogPosting", headline: p.title, url: absoluteUrl(`/${lang}/tips/${p.slug}/`), datePublished: p.date })),
         }}
       />
-      <section className="relative overflow-hidden bg-sun-50">
-        <Sparkle className="absolute left-[8%] top-10 size-8 motion-safe:animate-float" />
-        <Sparkle className="absolute right-[12%] top-24 size-6 motion-safe:animate-float" color="#FF8A75" />
-        <div className="container-x relative py-12 text-center sm:py-16">
-          <Link href={`/${lang}/`} className="inline-flex min-h-11 items-center gap-2 rounded-full bg-white px-4 font-bold text-aqua-800 shadow-sm hover:bg-aqua-50">
-            <Icon name="arrowLeft" className="size-5" /> {d.nav.backHome}
+      <section className="relative overflow-hidden border-b border-line bg-cream">
+        <div className="container-x relative py-14 sm:py-20">
+          <Link href={`/${lang}/`} className="inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-ink-soft hover:text-ink">
+            <Icon name="arrowLeft" className="size-4" /> {d.nav.backHome}
           </Link>
-          <ToothMascot className="mx-auto mt-6 size-20 motion-safe:animate-float" />
+          <p className="eyebrow mt-8">{d.tips.eyebrow}</p>
           <h1 className="h-display mt-4">{d.tips.listTitle}</h1>
-          <p className="lead mx-auto mt-3 max-w-xl">{d.tips.listIntro}</p>
+          <p className="lead mt-4 max-w-xl">{d.tips.listIntro}</p>
         </div>
       </section>
       <div className="container-x py-12 sm:py-16">
         <TipsFilter tags={tags} labels={d.tips.tags} allLabel={d.tips.all} filterLabel={d.tips.filterLabel} noResults={d.tips.noResults}>
-          <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <ul className="grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
             {posts.map((p) => (
               <li key={p.slug} data-tags={p.tags.join(",")}>
                 <TipCard post={p} headingLevel="h2" />

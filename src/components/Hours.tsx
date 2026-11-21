@@ -52,14 +52,14 @@ export function HoursTable({ s, caption }: { s: S; caption: string }) {
           const isToday = clock?.today === d;
           const ivs = clinic.hours[d];
           return (
-            <tr key={d} className={`${isToday ? "bg-sun-100 font-bold" : ""} transition-colors`} aria-current={isToday ? "date" : undefined}>
-              <th scope="row" className="rounded-l-2xl py-2.5 pl-4 pr-2 font-semibold">
+            <tr key={d} className={`${isToday ? "bg-aqua-50 font-semibold text-ink" : "text-ink-soft"} border-b border-line last:border-0 transition-colors`} aria-current={isToday ? "date" : undefined}>
+              <th scope="row" className="rounded-l-lg py-3 pl-3 pr-2 font-medium">
                 <span className="inline-flex items-center gap-2">
                   {s.days[d]}
-                  {isToday && <span className="pill bg-sun-300 !px-2 !py-0 text-xs text-ink">{s.today}</span>}
+                  {isToday && <span className="pill bg-aqua-700 !px-2 !py-0 text-[0.7rem] text-white">{s.today}</span>}
                 </span>
               </th>
-              <td className="rounded-r-2xl py-2.5 pr-4 text-right tabular-nums">
+              <td className="rounded-r-lg py-3 pr-3 text-right tabular-nums">
                 {ivs.length ? (
                   ivs.map((iv, i) => (
                     <span key={i} className="block sm:inline">

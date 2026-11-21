@@ -62,8 +62,8 @@ export function Header({ lang, s }: { lang: Locale; s: Strings }) {
   }, [open]);
 
   const linkCls = (id: string) =>
-    `relative rounded-full px-3.5 py-2 font-display font-bold transition-colors min-h-11 inline-flex items-center ${
-      active === id ? "bg-aqua-100 text-aqua-900" : "text-ink hover:bg-aqua-50 hover:text-aqua-800"
+    `relative inline-flex min-h-11 items-center px-3 text-[0.95rem] font-medium transition-colors after:absolute after:inset-x-3 after:bottom-2 after:h-px after:origin-left after:bg-aqua-700 after:transition-transform ${
+      active === id ? "text-aqua-800 after:scale-x-100" : "text-ink-soft hover:text-ink after:scale-x-0"
     }`;
 
   return (
@@ -71,7 +71,7 @@ export function Header({ lang, s }: { lang: Locale; s: Strings }) {
       <a href="#main" className="sr-only z-[100] rounded-full bg-aqua-700 px-5 py-3 font-bold text-white focus:not-sr-only focus:fixed focus:left-4 focus:top-4">
         {s.a11y.skipToContent}
       </a>
-      <header className={`sticky top-0 z-[70] transition-[background-color,box-shadow] duration-300 ${scrolled || open ? "bg-cream/95 shadow-[0_6px_24px_-14px_rgba(23,49,59,0.35)] backdrop-blur" : "bg-cream"}`}>
+      <header className={`sticky top-0 z-[70] transition-[background-color,border-color] duration-300 ${scrolled || open ? "border-b border-line bg-cream/85 backdrop-blur-md" : "border-b border-transparent bg-cream"}`}>
         <div className="container-x flex h-[4.5rem] items-center justify-between gap-3">
           <Link href={`/${lang}/`} className="shrink-0 rounded-2xl">
             <Logo />
@@ -95,23 +95,21 @@ export function Header({ lang, s }: { lang: Locale; s: Strings }) {
               hrefLang={otherLang}
               lang={otherLang}
               onClick={() => { try { localStorage.setItem("theori-lang", otherLang); } catch {} }}
-              className="inline-flex min-h-11 items-center gap-1.5 rounded-full px-3 font-bold text-aqua-800 ring-2 ring-aqua-100 transition hover:bg-aqua-50 hover:ring-aqua-200"
+              className="inline-flex min-h-11 items-center gap-1.5 rounded-full px-3.5 text-sm font-semibold text-ink ring-1 ring-line transition hover:ring-aqua-700"
               title={`${s.a11y.languageSwitcher}: ${s.lang.switchTo}`}
             >
-              <Icon name="globe" className="size-5" />
+              <Icon name="globe" className="size-4 text-ink-soft" />
               <span>{otherLang === "el" ? "ΕΛ" : "EN"}</span>
               <span className="sr-only">({s.lang.switchTo})</span>
             </Link>
-            <span className="wiggle hidden sm:inline-flex">
-              <a href={href("book")} className="btn btn-book !min-h-11 !px-5">
-                <Icon name="calendar" className="size-5" />
-                {s.nav.book}
-              </a>
-            </span>
+            <a href={href("book")} className="btn btn-book hidden !min-h-11 !px-5 sm:inline-flex">
+              {s.nav.book}
+              <Icon name="arrowRight" className="size-4" />
+            </a>
             <button
               ref={menuBtn}
               type="button"
-              className="inline-grid size-11 place-items-center rounded-full bg-aqua-700 text-white xl:hidden"
+              className="inline-grid size-11 place-items-center rounded-full text-ink ring-1 ring-line xl:hidden"
               aria-expanded={open}
               aria-controls="mobile-menu"
               aria-label={open ? s.a11y.closeMenu : s.a11y.openMenu}
@@ -125,10 +123,10 @@ export function Header({ lang, s }: { lang: Locale; s: Strings }) {
         {/* Mobile menu */}
         <div id="mobile-menu" hidden={!open} className="xl:hidden">
           <nav aria-label={s.a11y.mainNav} className="container-x max-h-[calc(100dvh-4.5rem)] overflow-y-auto pb-6">
-            <ul className="grid gap-2 rounded-[1.75rem] bg-white p-3 shadow-[var(--shadow-soft)]">
+            <ul className="grid gap-1 rounded-2xl border border-line bg-white p-2 shadow-[var(--shadow-soft)]">
               {!isHome && (
                 <li>
-                  <Link href={`/${lang}/`} onClick={() => setOpen(false)} className="flex min-h-12 items-center gap-3 rounded-2xl px-4 font-display text-lg font-bold hover:bg-aqua-50">
+                  <Link href={`/${lang}/`} onClick={() => setOpen(false)} className="flex min-h-12 items-center gap-3 rounded-xl px-4 font-display text-lg font-semibold hover:bg-aqua-50">
                     <Icon name="arrowLeft" className="size-5 text-aqua-700" /> {s.nav.home}
                   </Link>
                 </li>
@@ -138,7 +136,7 @@ export function Header({ lang, s }: { lang: Locale; s: Strings }) {
                   <a
                     href={href(id)}
                     onClick={() => setOpen(false)}
-                    className={`flex min-h-12 items-center rounded-2xl px-4 font-display text-lg font-bold ${active === id ? "bg-aqua-100 text-aqua-900" : "hover:bg-aqua-50"}`}
+                    className={`flex min-h-12 items-center rounded-xl px-4 font-display text-lg font-semibold ${active === id ? "bg-aqua-50 text-aqua-800" : "hover:bg-aqua-50"}`}
                   >
                     {s.nav[id]}
                   </a>
@@ -146,7 +144,7 @@ export function Header({ lang, s }: { lang: Locale; s: Strings }) {
               ))}
               <li className="pt-1">
                 <a href={href("book")} onClick={() => setOpen(false)} className="btn btn-book w-full">
-                  <Icon name="calendar" className="size-5" /> {s.nav.book}
+                  {s.nav.book} <Icon name="arrowRight" className="size-4" />
                 </a>
               </li>
             </ul>

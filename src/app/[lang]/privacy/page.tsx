@@ -17,8 +17,8 @@ export default async function Privacy({ params }: { params: Promise<{ lang: Loca
   const d = getDictionary(lang);
   return (
     <div className="container-x py-10 sm:py-14">
-      <Link href={`/${lang}/`} className="inline-flex min-h-11 items-center gap-2 rounded-full bg-white px-4 font-bold text-aqua-800 shadow-sm hover:bg-aqua-50">
-        <Icon name="arrowLeft" className="size-5" /> {d.nav.backHome}
+      <Link href={`/${lang}/`} className="inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-ink-soft hover:text-ink">
+        <Icon name="arrowLeft" className="size-4" /> {d.nav.backHome}
       </Link>
       <div className="article-body mt-8">
         <PlaceholderNote>{d.privacy.draftNote}</PlaceholderNote>
@@ -30,7 +30,7 @@ export default async function Privacy({ params }: { params: Promise<{ lang: Loca
             <p>{s.p}</p>
           </section>
         ))}
-        <section id="cookies" className="scroll-mt-28 rounded-[1.75rem] bg-aqua-50 p-6">
+        <section id="cookies" className="scroll-mt-28 rounded-2xl border border-line bg-white p-6">
           <h2 className="!mt-0">{d.privacy.cookiesTitle}</h2>
           <p>{d.privacy.cookiesText}</p>
           <CookieSettingsButton label={d.footer.cookieSettings} className="btn btn-primary mt-4" />

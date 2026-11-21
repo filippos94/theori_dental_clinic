@@ -5,7 +5,6 @@ import { clinic } from "@/config/clinic";
 import { weekdayOfDateString } from "@/lib/hours";
 import { SELECT_SERVICE_EVENT } from "./ServicesGrid";
 import { Icon } from "./Icon";
-import { ToothMascot, Sparkle } from "./Illustrations";
 import type { Dictionary } from "@/i18n";
 
 type S = Dictionary["book"];
@@ -100,12 +99,9 @@ export function BookingForm({ s, lang, services }: { s: S; lang: string; service
 
   if (status === "sent") {
     return (
-      <div ref={successRef} tabIndex={-1} role="status" className="card relative animate-pop overflow-hidden p-8 text-center outline-none sm:p-12">
-        <Sparkle className="absolute left-8 top-8 size-8 motion-safe:animate-float" />
-        <Sparkle className="absolute bottom-10 right-10 size-6 motion-safe:animate-float" color="#FF8A75" />
-        <Sparkle className="absolute right-16 top-12 size-5 motion-safe:animate-float" color="#16AFC4" />
-        <ToothMascot className="mx-auto size-28 motion-safe:animate-float" mood="wink" />
-        <h3 className="mt-4 text-2xl text-ink sm:text-3xl">{s.successTitle}</h3>
+      <div ref={successRef} tabIndex={-1} role="status" className="card relative animate-pop overflow-hidden p-8 text-center shadow-[var(--shadow-soft)] outline-none sm:p-12">
+        <span className="mx-auto grid size-16 place-items-center rounded-full bg-mint-100 text-mint-700"><Icon name="check" className="size-8" strokeWidth={2} /></span>
+        <h3 className="mt-5 text-2xl text-ink sm:text-3xl">{s.successTitle}</h3>
         <p className="lead mx-auto mt-3 max-w-md">{s.successText.replace("{name}", f.name.trim().split(" ")[0])}</p>
         <div className="mt-6 flex flex-wrap justify-center gap-3">
           <a href={clinic.phone.href} className="btn btn-primary"><Icon name="phone" className="size-5" /> {clinic.phone.display}</a>
@@ -128,7 +124,7 @@ export function BookingForm({ s, lang, services }: { s: S; lang: string; service
       netlify-honeypot="bot-field"
       noValidate
       onSubmit={submit}
-      className="card grid gap-5 p-6 sm:grid-cols-2 sm:p-8 lg:p-10"
+      className="card grid gap-5 p-6 shadow-[var(--shadow-soft)] sm:grid-cols-2 sm:p-8 lg:p-10"
     >
       <input type="hidden" name="form-name" value={FORM_NAME} />
       <p className="hidden" aria-hidden="true">
@@ -172,7 +168,7 @@ export function BookingForm({ s, lang, services }: { s: S; lang: string; service
         <legend className="field-label">{s.time}</legend>
         <div className="grid gap-2" {...(errors.time ? { "aria-describedby": "time-error" } : {})}>
           {([["any", s.timeAny], ["morning", s.timeMorning], ["afternoon", s.timeAfternoon]] as const).map(([v, label]) => (
-            <label key={v} className={`flex min-h-11 cursor-pointer items-center gap-3 rounded-2xl border-2 px-4 py-2 transition ${f.time === v ? "border-aqua-700 bg-aqua-50" : "border-aqua-100 bg-white hover:border-aqua-200"}`}>
+            <label key={v} className={`flex min-h-11 cursor-pointer items-center gap-3 rounded-xl border px-4 py-2 text-[0.95rem] transition ${f.time === v ? "border-aqua-700 bg-aqua-50" : "border-[#cfd8d6] bg-white hover:border-[#aab8b6]"}`}>
               <input type="radio" name="time" value={v} checked={f.time === v} onChange={() => set("time", v)} className="size-5 accent-aqua-700" aria-invalid={errors.time && v === "afternoon" ? true : undefined} />
               <span>{label}</span>
             </label>
@@ -185,7 +181,7 @@ export function BookingForm({ s, lang, services }: { s: S; lang: string; service
         <textarea id="message" name="message" rows={4} className="field resize-y" placeholder={s.messageHint} value={f.message} onChange={(e) => set("message", e.target.value)} />
       </div>
       <div className="sm:col-span-2">
-        <label className="flex cursor-pointer items-start gap-3 rounded-2xl bg-aqua-50 p-4">
+        <label className="flex cursor-pointer items-start gap-3 rounded-xl bg-cream p-4">
           <input type="checkbox" name="consent" className="mt-1 size-5 shrink-0 accent-aqua-700" checked={f.consent} onChange={(e) => set("consent", e.target.checked)} {...err("consent")} />
           <span className="text-[0.95rem]">
             {s.consent}{" "}
@@ -197,7 +193,7 @@ export function BookingForm({ s, lang, services }: { s: S; lang: string; service
       </div>
       <div className="flex flex-col items-start gap-4 sm:col-span-2 sm:flex-row sm:items-center sm:justify-between">
         <button type="submit" className="btn btn-book w-full sm:w-auto" disabled={status === "sending"}>
-          {status === "sending" ? <>{s.sending}</> : <><Icon name="calendar" className="size-5" /> {s.submit}</>}
+          {status === "sending" ? <>{s.sending}</> : <>{s.submit} <Icon name="arrowRight" className="size-4" /></>}
         </button>
         <p className="text-ink-soft">
           {s.orCall}{" "}

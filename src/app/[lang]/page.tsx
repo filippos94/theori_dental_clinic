@@ -7,7 +7,6 @@ import { pageMetadata, dentistJsonLd } from "@/lib/seo";
 import { Section, SectionHeading } from "@/components/Section";
 import { Picture } from "@/components/Picture";
 import { Icon } from "@/components/Icon";
-import { ToothMascot, Sparkle, Toothbrush, Blob } from "@/components/Illustrations";
 import { PlaceholderNote } from "@/components/PlaceholderNote";
 import { ServicesGrid } from "@/components/ServicesGrid";
 import { ReviewsCarousel } from "@/components/ReviewsCarousel";
@@ -26,6 +25,12 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: Loc
 /** "[confirm]" markers in FAQ answers: shown as a badge while placeholders are on, stripped otherwise. */
 const CONFIRM = /^\[(confirm|επιβεβαίωση)\]\s*/i;
 
+const Stars = ({ className = "size-4" }: { className?: string }) => (
+  <span className="flex text-sun-400" aria-hidden="true">
+    {Array.from({ length: 5 }).map((_, i) => <Icon key={i} name="star" className={`${className} fill-current`} strokeWidth={1.5} />)}
+  </span>
+);
+
 export default async function Home({ params }: { params: Promise<{ lang: Locale }> }) {
   const { lang } = await params;
   const d = getDictionary(lang);
@@ -33,12 +38,17 @@ export default async function Home({ params }: { params: Promise<{ lang: Locale 
   const rating = clinic.google.rating.toFixed(1);
   const services = clinic.services.map((s) => ({ ...s, ...d.services.items[s.id] }));
   const hoursStrings = { ...d.contact, days: d.contact.days };
+  const delay = (ms: number) => ({ "--reveal-delay": `${ms}ms` }) as React.CSSProperties;
 
   const faqJsonLd = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
     mainEntity: d.faq.items.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a.replace(CONFIRM, "") } })),
   };
+  const [titleA, titleB] = (() => {
+    const w = d.hero.title.split(" ");
+    return [w.slice(0, -3).join(" "), w.slice(-3).join(" ")];
+  })();
 
   return (
     <>
@@ -47,105 +57,98 @@ export default async function Home({ params }: { params: Promise<{ lang: Locale 
 
       {/* ───────── 1. HERO ───────── */}
       <section id="home" aria-labelledby="hero-title" className="relative overflow-hidden bg-cream">
-        <Blob className="pointer-events-none absolute -left-40 -top-40 size-[28rem] opacity-60" color="#CDEFF5" variant={1} />
-        <div className="container-x relative grid items-center gap-12 pb-20 pt-8 sm:pt-12 lg:grid-cols-[1.05fr_1fr] lg:gap-8 lg:pb-28 lg:pt-16">
+        <div aria-hidden="true" className="pointer-events-none absolute -right-40 -top-40 size-[44rem] rounded-full bg-[radial-gradient(closest-side,#dceded,transparent)] opacity-80" />
+        <div className="container-x relative grid items-center gap-14 pb-16 pt-10 sm:pt-14 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16 lg:pb-24 lg:pt-20">
           <div className="animate-pop">
-            <p className="pill bg-mint-100 text-mint-700">
-              <Icon name="heart" className="size-4" /> {d.hero.eyebrow}
-            </p>
-            <h1 id="hero-title" className="h-display mt-5 text-ink">
-              {d.hero.title.split(" ").slice(0, -3).join(" ")}{" "}
-              <span className="relative whitespace-nowrap text-aqua-700">
-                {d.hero.title.split(" ").slice(-3).join(" ")}
-                <svg viewBox="0 0 300 20" preserveAspectRatio="none" className="absolute -bottom-2 left-0 h-3 w-full text-sun-300" aria-hidden="true">
-                  <path d="M4 14C60 4 150 2 296 10" stroke="currentColor" strokeWidth="8" strokeLinecap="round" fill="none" />
-                </svg>
-              </span>
+            <p className="eyebrow">{d.hero.eyebrow}</p>
+            <h1 id="hero-title" className="h-display mt-6">
+              {titleA} <span className="text-aqua-700">{titleB}</span>
             </h1>
             <p className="lead mt-6 max-w-xl">{d.hero.subtitle}</p>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-              <span className="wiggle">
-                <a href="#book" className="btn btn-book w-full !min-h-14 !px-7 !text-lg sm:w-auto">
-                  <Icon name="calendar" className="size-6" /> {d.hero.ctaBook}
-                </a>
-              </span>
-              <a href={clinic.phone.href} className="btn btn-primary !min-h-14 !px-7 !text-lg">
-                <Icon name="phone" className="size-6" /> {t(d.hero.ctaCall, { phone: clinic.phone.display })}
+            <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+              <a href="#book" className="btn btn-book !min-h-14 !px-7">
+                {d.hero.ctaBook} <Icon name="arrowRight" className="size-4" />
+              </a>
+              <a href={clinic.phone.href} className="btn btn-outline !min-h-14 !px-7">
+                <Icon name="phone" className="size-4" /> {t(d.hero.ctaCall, { phone: clinic.phone.display })}
               </a>
             </div>
-            <div className="mt-8 flex flex-wrap items-center gap-3">
-              <a
-                href={clinic.google.reviewsUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group inline-flex items-center gap-3 rounded-full bg-white py-2 pl-2 pr-5 shadow-[var(--shadow-soft)] transition hover:-translate-y-0.5"
-              >
-                <span className="grid size-11 place-items-center rounded-full bg-sun-100" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" className="size-6"><path fill="#4285F4" d="M22.5 12.3c0-.8-.1-1.5-.2-2.3H12v4.3h5.9a5 5 0 0 1-2.2 3.3v2.8h3.6c2-1.9 3.2-4.7 3.2-8.1Z"/><path fill="#34A853" d="M12 23c3 0 5.5-1 7.3-2.7l-3.6-2.8c-1 .7-2.2 1.1-3.7 1.1-2.9 0-5.3-1.9-6.2-4.5H2.1v2.9A11 11 0 0 0 12 23Z"/><path fill="#FBBC05" d="M5.8 14.1a6.6 6.6 0 0 1 0-4.2V7H2.1a11 11 0 0 0 0 10l3.7-2.9Z"/><path fill="#EA4335" d="M12 5.4c1.6 0 3.1.6 4.2 1.7l3.2-3.2A11 11 0 0 0 2.1 7l3.7 2.9C6.7 7.3 9.1 5.4 12 5.4Z"/></svg>
-                </span>
-                <span className="leading-tight">
-                  <span className="flex items-center gap-1 font-display font-extrabold text-ink">
-                    {t(d.hero.googleBadge, { rating })}
-                    <span className="flex text-sun-400" aria-hidden="true">
-                      {Array.from({ length: 5 }).map((_, i) => <Icon key={i} name="star" className="size-4 fill-current" strokeWidth={1.5} />)}
-                    </span>
-                  </span>
-                  <span className="text-sm text-aqua-800 group-hover:underline">{d.hero.googleBadgeSub} <span className="sr-only">{d.a11y.external}</span></span>
-                </span>
-              </a>
-              <OpenBadge s={hoursStrings} />
-            </div>
+            <ul className="mt-10 grid gap-3 border-t border-line pt-6 text-sm text-ink-soft sm:grid-cols-3">
+              {d.hero.trust.map((item) => (
+                <li key={item} className="flex items-center gap-2">
+                  <Icon name="check" className="size-4 shrink-0 text-aqua-700" strokeWidth={2.2} /> {item}
+                </li>
+              ))}
+            </ul>
           </div>
 
-          <div className="relative mx-auto w-full max-w-[34rem]">
-            <Blob className="absolute -right-10 -top-10 size-[110%] text-sun-300" color="#FFD95E" variant={0} />
-            <div className="relative overflow-hidden rounded-[42%_58%_55%_45%/48%_42%_58%_52%] border-[6px] border-white shadow-[var(--shadow-pop)]">
-              <Picture name="hero-family" alt={d.hero.imageAlt} priority sizes="(min-width: 1024px) 540px, 92vw" className="aspect-[5/4]" placeholderLabel={d.common.placeholderPhoto} badgeClassName="top-[12%] left-1/2 -translate-x-1/2 whitespace-nowrap" />
+          <div className="relative mx-auto w-full max-w-[30rem] lg:max-w-none">
+            <div className="overflow-hidden rounded-[2rem]">
+              <Picture name="hero-family" alt={d.hero.imageAlt} priority sizes="(min-width: 1024px) 520px, 92vw" className="aspect-[4/5]" placeholderLabel={d.common.placeholderPhoto} badgeClassName="top-4 left-4" />
             </div>
-            <ToothMascot className="absolute -bottom-6 -left-4 size-24 drop-shadow-lg motion-safe:animate-float sm:size-32" />
-            <Toothbrush className="absolute -right-2 bottom-6 h-28 rotate-[20deg] motion-safe:animate-float sm:h-36 [animation-delay:1.5s]" />
-            <Sparkle className="absolute left-6 top-0 size-10 motion-safe:animate-float [animation-delay:.6s]" />
-            <Sparkle className="absolute right-8 top-1/3 size-6 motion-safe:animate-float" color="#FF8A75" />
+            {/* Floating Google rating card */}
+            <a
+              href={clinic.google.reviewsUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="absolute -left-4 bottom-10 flex items-center gap-3 rounded-2xl border border-line bg-white/95 p-4 pr-5 shadow-[var(--shadow-pop)] backdrop-blur transition hover:-translate-y-0.5 sm:-left-10"
+            >
+              <svg viewBox="0 0 24 24" className="size-8 shrink-0" aria-hidden="true"><path fill="#4285F4" d="M22.5 12.3c0-.8-.1-1.5-.2-2.3H12v4.3h5.9a5 5 0 0 1-2.2 3.3v2.8h3.6c2-1.9 3.2-4.7 3.2-8.1Z"/><path fill="#34A853" d="M12 23c3 0 5.5-1 7.3-2.7l-3.6-2.8c-1 .7-2.2 1.1-3.7 1.1-2.9 0-5.3-1.9-6.2-4.5H2.1v2.9A11 11 0 0 0 12 23Z"/><path fill="#FBBC05" d="M5.8 14.1a6.6 6.6 0 0 1 0-4.2V7H2.1a11 11 0 0 0 0 10l3.7-2.9Z"/><path fill="#EA4335" d="M12 5.4c1.6 0 3.1.6 4.2 1.7l3.2-3.2A11 11 0 0 0 2.1 7l3.7 2.9C6.7 7.3 9.1 5.4 12 5.4Z"/></svg>
+              <span className="leading-tight">
+                <span className="flex items-center gap-2 font-display text-xl font-bold text-ink">{rating} <Stars /></span>
+                <span className="text-xs font-medium text-ink-soft">{d.hero.ratingCard} · {d.hero.googleBadgeSub}<span className="sr-only"> {d.a11y.external}</span></span>
+              </span>
+            </a>
+            {/* Floating open-now card */}
+            <div className="absolute -right-2 top-8 rounded-2xl border border-line bg-white/95 p-3 shadow-[var(--shadow-pop)] backdrop-blur sm:-right-6">
+              <OpenBadge s={hoursStrings} />
+            </div>
           </div>
         </div>
       </section>
 
       {/* ───────── 2. SERVICES ───────── */}
-      <Section id="services" tone="aqua" labelledBy="services-title">
-        <SectionHeading id="services-title" title={d.services.title} subtitle={d.services.subtitle} eyebrow={<PlaceholderNote className="mb-4">{d.services.placeholderNote}</PlaceholderNote>} />
+      <Section id="services" tone="white" labelledBy="services-title">
+        <SectionHeading
+          id="services-title"
+          eyebrow={d.services.eyebrow}
+          title={d.services.title}
+          subtitle={d.services.subtitle}
+          note={<PlaceholderNote>{d.services.placeholderNote}</PlaceholderNote>}
+        />
         <ServicesGrid items={services} s={d.services} />
       </Section>
 
       {/* ───────── 3. FOR THE WHOLE FAMILY ───────── */}
-      <Section tone="mint" flip labelledBy="family-title">
-        <div className="grid items-center gap-12 lg:grid-cols-2">
-          <div className="relative order-last lg:order-first" data-reveal>
-            <div className="overflow-hidden rounded-[2.5rem] border-[6px] border-white shadow-[var(--shadow-soft)]">
+      <Section tone="cream" labelledBy="family-title">
+        <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
+          <div className="order-last lg:order-first" data-reveal>
+            <div className="overflow-hidden rounded-[2rem]">
               <Picture name="family" alt={d.family.imageAlt} sizes="(min-width: 1024px) 560px, 92vw" className="aspect-[4/3]" placeholderLabel={d.common.placeholderPhoto} />
             </div>
-            <Sparkle className="absolute -right-3 -top-4 size-12 motion-safe:animate-float" />
           </div>
           <div>
             <div data-reveal>
+              <p className="eyebrow mb-4">{d.family.eyebrow}</p>
               <h2 id="family-title" className="h-section">{d.family.title}</h2>
-              <p className="lead mt-3">{d.family.subtitle}</p>
+              <p className="lead mt-4">{d.family.subtitle}</p>
             </div>
-            <div className="mt-8 grid gap-4 sm:grid-cols-2">
+            <div className="mt-10 grid gap-8 sm:grid-cols-2">
               {[
-                { icon: "balloon", title: d.family.kidsTitle, text: d.family.kidsText, cls: "bg-sun-100 text-ink" },
-                { icon: "hand", title: d.family.nervousTitle, text: d.family.nervousText, cls: "bg-coral-100 text-ink" },
+                { icon: "smile", title: d.family.kidsTitle, text: d.family.kidsText },
+                { icon: "hand", title: d.family.nervousTitle, text: d.family.nervousText },
               ].map((c, i) => (
-                <div key={c.title} className="card p-6" data-reveal style={{ "--reveal-delay": `${i * 120}ms` } as React.CSSProperties}>
-                  <span className={`grid size-12 place-items-center rounded-2xl ${c.cls}`}><Icon name={c.icon} className="size-6" /></span>
-                  <h3 className="mt-4 text-xl">{c.title}</h3>
-                  <p className="mt-2 text-ink-soft">{c.text}</p>
+                <div key={c.title} data-reveal style={delay(i * 100)}>
+                  <span className="grid size-11 place-items-center rounded-xl bg-white text-aqua-700 ring-1 ring-line"><Icon name={c.icon} className="size-5" strokeWidth={1.7} /></span>
+                  <h3 className="mt-4 text-lg">{c.title}</h3>
+                  <p className="mt-2 text-[0.95rem] text-ink-soft">{c.text}</p>
                 </div>
               ))}
             </div>
-            <ul className="mt-6 grid gap-2 sm:grid-cols-2" data-reveal>
+            <ul className="mt-10 grid gap-3 border-t border-line pt-8 sm:grid-cols-2" data-reveal>
               {d.family.points.map((p) => (
-                <li key={p} className="flex items-start gap-2 font-semibold">
-                  <span className="mt-0.5 grid size-6 shrink-0 place-items-center rounded-full bg-mint-300 text-ink"><Icon name="check" className="size-4" strokeWidth={3} /></span>
+                <li key={p} className="flex items-start gap-2.5 text-[0.95rem] font-medium">
+                  <Icon name="check" className="mt-0.5 size-5 shrink-0 text-aqua-700" strokeWidth={2.2} />
                   {p}
                 </li>
               ))}
@@ -155,20 +158,26 @@ export default async function Home({ params }: { params: Promise<{ lang: Locale 
       </Section>
 
       {/* ───────── 4. MEET THE TEAM ───────── */}
-      <Section id="about" tone="cream" labelledBy="team-title">
-        <SectionHeading id="team-title" title={d.team.title} subtitle={d.team.subtitle} eyebrow={<PlaceholderNote className="mb-4">{d.team.placeholderNote}</PlaceholderNote>} />
-        <ul className="mx-auto grid max-w-4xl gap-8 sm:grid-cols-2">
+      <Section id="about" tone="white" labelledBy="team-title">
+        <SectionHeading
+          id="team-title"
+          eyebrow={d.team.eyebrow}
+          title={d.team.title}
+          subtitle={d.team.subtitle}
+          note={<PlaceholderNote>{d.team.placeholderNote}</PlaceholderNote>}
+        />
+        <ul className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
           {clinic.team.map((m, i) => {
             const tm = (d.team.members as Record<string, { role: string; bio: string }>)[m.id];
             return (
-              <li key={m.id} className="card overflow-hidden text-center" data-reveal style={{ "--reveal-delay": `${i * 120}ms` } as React.CSSProperties}>
-                <Picture name={m.photo} alt={t(d.team.photoAlt, { name: m.name })} sizes="(min-width: 640px) 420px, 92vw" className="aspect-[4/5]" placeholderLabel={d.common.placeholderPhoto} />
-                <div className="p-6 sm:p-8">
-                  <h3 className="text-2xl">{m.name}</h3>
-                  <p className="mt-1 font-display font-bold text-aqua-700">{tm.role}</p>
-                  <p className="text-sm text-ink-soft">{m.qualifications}</p>
-                  <p className="mt-4 text-ink-soft">{tm.bio}</p>
+              <li key={m.id} data-reveal style={delay(i * 100)}>
+                <div className="overflow-hidden rounded-2xl">
+                  <Picture name={m.photo} alt={t(d.team.photoAlt, { name: m.name })} sizes="(min-width: 1024px) 380px, (min-width: 640px) 46vw, 92vw" className="aspect-[4/5]" placeholderLabel={d.common.placeholderPhoto} />
                 </div>
+                <h3 className="mt-5 text-xl">{m.name}</h3>
+                <p className="mt-1 text-sm font-semibold text-aqua-700">{tm.role}</p>
+                <p className="text-sm text-ink-soft">{m.qualifications}</p>
+                <p className="mt-3 text-[0.95rem] text-ink-soft">{tm.bio}</p>
               </li>
             );
           })}
@@ -176,66 +185,90 @@ export default async function Home({ params }: { params: Promise<{ lang: Locale 
       </Section>
 
       {/* ───────── 5. DENTAL TIPS ───────── */}
-      <Section id="tips" tone="sun" labelledBy="tips-title">
-        <SectionHeading id="tips-title" title={d.tips.title} subtitle={d.tips.subtitle} />
-        <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <Section id="tips" tone="cream" labelledBy="tips-title">
+        <SectionHeading
+          id="tips-title"
+          eyebrow={d.tips.eyebrow}
+          title={d.tips.title}
+          subtitle={d.tips.subtitle}
+          action={
+            <Link href={`/${lang}/tips/`} className="btn btn-outline shrink-0 self-start md:self-auto">
+              {d.tips.seeAll} <Icon name="arrowRight" className="size-4" />
+            </Link>
+          }
+        />
+        <ul className="grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
           {latest.map((p, i) => (
-            <li key={p.slug} data-reveal style={{ "--reveal-delay": `${i * 100}ms` } as React.CSSProperties} className={i === 2 ? "sm:col-span-2 lg:col-span-1" : ""}>
+            <li key={p.slug} data-reveal style={delay(i * 100)}>
               <TipCard post={p} />
             </li>
           ))}
         </ul>
-        <div className="mt-10 text-center">
-          <Link href={`/${lang}/tips/`} className="btn btn-primary">
-            {d.tips.seeAll} <Icon name="arrowRight" className="size-5" />
-          </Link>
-        </div>
       </Section>
 
       {/* ───────── 6. REVIEWS ───────── */}
-      <Section id="reviews" tone="coral" flip labelledBy="reviews-title">
+      <Section id="reviews" tone="aqua" labelledBy="reviews-title">
         <SectionHeading
           id="reviews-title"
+          eyebrow={d.reviews.eyebrow}
           title={d.reviews.title}
           subtitle={t(d.reviews.subtitle, { rating })}
-          eyebrow={<PlaceholderNote className="mb-4">{d.reviews.placeholderNote}</PlaceholderNote>}
+          note={<PlaceholderNote>{d.reviews.placeholderNote}</PlaceholderNote>}
+          action={
+            <a href={clinic.google.reviewsUrl} target="_blank" rel="noopener noreferrer" className="btn btn-outline shrink-0 self-start md:self-auto">
+              {d.reviews.readOnGoogle} <Icon name="external" className="size-4" /><span className="sr-only">{d.a11y.external}</span>
+            </a>
+          }
         />
         <ReviewsCarousel reviews={d.reviews.items} s={{ ...d.a11y, carouselLabel: d.reviews.carouselLabel }} />
-        <div className="mt-8 text-center">
-          <a href={clinic.google.reviewsUrl} target="_blank" rel="noopener noreferrer" className="btn btn-outline">
-            {d.reviews.readOnGoogle} <Icon name="external" className="size-4" /><span className="sr-only">{d.a11y.external}</span>
-          </a>
-        </div>
       </Section>
 
       {/* ───────── 7. FAQ ───────── */}
       <Section id="faq" tone="white" labelledBy="faq-title">
-        <SectionHeading id="faq-title" title={d.faq.title} subtitle={d.faq.subtitle} eyebrow={<PlaceholderNote className="mb-4">{d.faq.placeholderNote}</PlaceholderNote>} />
-        <div className="mx-auto grid max-w-3xl gap-3">
-          {d.faq.items.map((f, i) => {
-            const needsConfirm = CONFIRM.test(f.a);
-            return (
-              <details key={i} className="faq-item rounded-[1.5rem] bg-aqua-50 transition-shadow open:bg-white" data-reveal name="faq">
-                <summary className="flex min-h-14 items-center justify-between gap-4 rounded-[1.5rem] px-5 py-4 font-display text-lg font-extrabold sm:px-6">
-                  {f.q}
-                  <span className="faq-chevron grid size-9 shrink-0 place-items-center rounded-full bg-white text-aqua-800 shadow-sm"><Icon name="chevronDown" className="size-5" /></span>
-                </summary>
-                <div className="px-5 pb-5 text-ink-soft sm:px-6">
-                  {needsConfirm && clinic.showPlaceholderNotes && <span className="placeholder-note mb-2 !py-0.5">{d.common.toConfirm}</span>}
-                  <p>{f.a.replace(CONFIRM, "")}</p>
-                </div>
-              </details>
-            );
-          })}
+        <div className="grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
+          <div data-reveal>
+            <PlaceholderNote className="mb-4">{d.faq.placeholderNote}</PlaceholderNote>
+            <p className="eyebrow mb-4">{d.faq.eyebrow}</p>
+            <h2 id="faq-title" className="h-section">{d.faq.title}</h2>
+            <p className="lead mt-4">{d.faq.subtitle}</p>
+            <a href={clinic.phone.href} className="btn btn-outline mt-8"><Icon name="phone" className="size-4" /> {clinic.phone.display}</a>
+          </div>
+          <div className="border-t border-line">
+            {d.faq.items.map((f, i) => {
+              const needsConfirm = CONFIRM.test(f.a);
+              return (
+                <details key={i} className="faq-item border-b border-line" data-reveal name="faq">
+                  <summary className="flex min-h-16 items-center justify-between gap-6 py-5 font-display text-lg font-semibold tracking-tight">
+                    {f.q}
+                    <span className="faq-chevron grid size-8 shrink-0 place-items-center rounded-full border border-line text-ink">
+                      <svg viewBox="0 0 24 24" className="size-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14" /></svg>
+                    </span>
+                  </summary>
+                  <div className="max-w-2xl pb-6 text-ink-soft">
+                    {needsConfirm && clinic.showPlaceholderNotes && <span className="placeholder-note mb-2">{d.common.toConfirm}</span>}
+                    <p>{f.a.replace(CONFIRM, "")}</p>
+                  </div>
+                </details>
+              );
+            })}
+          </div>
         </div>
       </Section>
 
       {/* ───────── 8. BOOK ───────── */}
-      <Section id="book" tone="aqua" labelledBy="book-title">
-        <div className="mx-auto max-w-4xl">
-          <div className="relative">
-            <ToothMascot className="absolute -top-6 right-0 hidden size-24 motion-safe:animate-float md:block" mood="wink" />
-            <SectionHeading id="book-title" title={d.book.title} subtitle={d.book.subtitle} />
+      <Section id="book" tone="cream" labelledBy="book-title">
+        <div className="grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
+          <div data-reveal>
+            <p className="eyebrow mb-4">{d.book.eyebrow}</p>
+            <h2 id="book-title" className="h-section">{d.book.title}</h2>
+            <p className="lead mt-4">{d.book.subtitle}</p>
+            <div className="mt-8 rounded-2xl border border-line bg-white p-6">
+              <p className="text-sm text-ink-soft">{d.book.orCall}</p>
+              <a href={clinic.phone.href} className="mt-1 inline-flex min-h-11 items-center gap-2 font-display text-2xl font-bold tracking-tight text-ink hover:text-aqua-700">
+                {clinic.phone.display}
+              </a>
+              <div className="mt-3"><OpenBadge s={hoursStrings} /></div>
+            </div>
           </div>
           <div data-reveal>
             <BookingForm s={d.book} lang={lang} services={services.map(({ id, title }) => ({ id, title }))} />
@@ -244,15 +277,15 @@ export default async function Home({ params }: { params: Promise<{ lang: Locale 
       </Section>
 
       {/* ───────── 9. CONTACT & LOCATION ───────── */}
-      <Section id="contact" tone="mint" flip labelledBy="contact-title">
-        <SectionHeading id="contact-title" title={d.contact.title} subtitle={d.contact.subtitle} />
-        <div className="grid gap-6 lg:grid-cols-[1fr_1.1fr]">
+      <Section id="contact" tone="white" labelledBy="contact-title">
+        <SectionHeading id="contact-title" eyebrow={d.contact.eyebrow} title={d.contact.title} subtitle={d.contact.subtitle} />
+        <div className="grid gap-6 lg:grid-cols-[1fr_1.15fr]">
           <div className="grid gap-6">
-            <div className="card grid gap-5 p-6 sm:p-8" data-reveal>
+            <div className="card grid gap-6 p-6 sm:p-8" data-reveal>
               <div className="flex items-start gap-4">
-                <span className="grid size-12 shrink-0 place-items-center rounded-2xl bg-coral-100 text-coral-700"><Icon name="pin" /></span>
+                <span className="grid size-11 shrink-0 place-items-center rounded-xl bg-aqua-50 text-aqua-700"><Icon name="pin" className="size-5" /></span>
                 <div>
-                  <h3 className="text-lg">{d.contact.address}</h3>
+                  <h3 className="text-base">{d.contact.address}</h3>
                   <address className="not-italic text-ink-soft">
                     {clinic.address.street[lang]}<br />
                     {clinic.address.locality[lang]} {clinic.address.postalCode}, {clinic.address.country[lang]}
@@ -260,39 +293,39 @@ export default async function Home({ params }: { params: Promise<{ lang: Locale 
                 </div>
               </div>
               <div className="flex items-start gap-4">
-                <span className="grid size-12 shrink-0 place-items-center rounded-2xl bg-aqua-100 text-aqua-800"><Icon name="phone" /></span>
+                <span className="grid size-11 shrink-0 place-items-center rounded-xl bg-aqua-50 text-aqua-700"><Icon name="phone" className="size-5" /></span>
                 <div>
-                  <h3 className="text-lg">{d.contact.phone}</h3>
-                  <a href={clinic.phone.href} className="inline-flex min-h-11 items-center text-lg font-bold text-aqua-700 underline-offset-4 hover:underline">{clinic.phone.display}</a>
+                  <h3 className="text-base">{d.contact.phone}</h3>
+                  <a href={clinic.phone.href} className="inline-flex min-h-11 items-center font-semibold text-aqua-700 underline-offset-4 hover:underline">{clinic.phone.display}</a>
                 </div>
               </div>
               {clinic.email && (
                 <div className="flex items-start gap-4">
-                  <span className="grid size-12 shrink-0 place-items-center rounded-2xl bg-sun-100 text-sun-700"><Icon name="mail" /></span>
+                  <span className="grid size-11 shrink-0 place-items-center rounded-xl bg-aqua-50 text-aqua-700"><Icon name="mail" className="size-5" /></span>
                   <div>
-                    <h3 className="text-lg">{d.contact.email}</h3>
-                    <a href={`mailto:${clinic.email}`} className="font-bold text-aqua-700 underline-offset-4 hover:underline">{clinic.email}</a>
+                    <h3 className="text-base">{d.contact.email}</h3>
+                    <a href={`mailto:${clinic.email}`} className="font-semibold text-aqua-700 underline-offset-4 hover:underline">{clinic.email}</a>
                   </div>
                 </div>
               )}
-              <div className="flex flex-wrap gap-3">
-                <a href={clinic.google.directionsUrl} target="_blank" rel="noopener noreferrer" className="btn btn-primary">
-                  <Icon name="pin" className="size-5" /> {d.contact.directions}<span className="sr-only">{d.a11y.external}</span>
+              <div className="flex flex-wrap gap-3 border-t border-line pt-6">
+                <a href={clinic.google.directionsUrl} target="_blank" rel="noopener noreferrer" className="btn btn-book">
+                  {d.contact.directions} <Icon name="arrowRight" className="size-4" /><span className="sr-only">{d.a11y.external}</span>
                 </a>
-                <a href={clinic.phone.href} className="btn btn-outline"><Icon name="phone" className="size-5" /> {d.common.call}</a>
+                <a href={clinic.phone.href} className="btn btn-outline"><Icon name="phone" className="size-4" /> {d.common.call}</a>
                 {clinic.whatsapp && (
-                  <a href={`https://wa.me/${clinic.whatsapp}`} target="_blank" rel="noopener noreferrer" className="btn btn-outline"><Icon name="whatsapp" className="size-5" /> {d.contact.whatsapp}</a>
+                  <a href={`https://wa.me/${clinic.whatsapp}`} target="_blank" rel="noopener noreferrer" className="btn btn-outline"><Icon name="whatsapp" className="size-4" /> {d.contact.whatsapp}</a>
                 )}
               </div>
             </div>
 
             <div className="card p-6 sm:p-8" data-reveal>
               <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
-                <h3 className="flex items-center gap-2 text-lg"><Icon name="clock" className="text-aqua-700" /> {d.contact.hoursTitle}</h3>
+                <h3 className="text-base">{d.contact.hoursTitle}</h3>
                 <OpenBadge s={hoursStrings} />
               </div>
               <HoursTable s={hoursStrings} caption={d.contact.hoursTitle} />
-              <p className="mt-3 text-sm text-ink-soft">{d.contact.timezoneNote}</p>
+              <p className="mt-3 text-xs text-ink-soft">{d.contact.timezoneNote}</p>
             </div>
           </div>
           <div data-reveal>

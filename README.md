@@ -4,8 +4,8 @@ A bright, friendly, bilingual (English / Greek) one-page website with a "Dental 
 
 - **Stack:** Next.js 16 (App Router, static export) + Tailwind CSS 4 + TypeScript
 - **Output:** a plain static site in `/out`, so any host works (Netlify and Vercel configs are included)
-- **Fonts:** self-hosted *M PLUS Rounded 1c* (headings) and *Noto Sans* (body), both with Greek. No requests go to Google Fonts, which helps with GDPR.
-- **Measured (Lighthouse, mobile, gzip on):** Performance 93 · Accessibility 100 · Best Practices 100 · SEO 100
+- **Fonts:** self-hosted *Manrope* (headings) and *Inter* (body), both with Greek. No requests go to Google Fonts, which helps with GDPR.
+- **Measured (Lighthouse, mobile, gzip on):** Performance 94–98 · Accessibility 100 · Best Practices 100 · SEO 100
 
 ```
 /en/                    one-page home  (/el/ for Greek)
@@ -54,7 +54,7 @@ npm run serve
 | **All site text** (EN / EL) | `src/i18n/en.json`, `src/i18n/el.json` |
 | **Blog posts** | `content/tips/<slug>.en.md` and `<slug>.el.md` |
 | **Photos and illustrations** (source files) | `assets/photos/` |
-| Colours, fonts, animations | `src/app/globals.css` (`@theme` block) |
+| Colours, fonts, animations (calm teal / sand / sage palette) | `src/app/globals.css` (`@theme` block) |
 | Sections of the home page | `src/app/[lang]/page.tsx` |
 
 **Turning off the "placeholder" badges:** once everything in `PLACEHOLDERS.md` is supplied, set `showPlaceholderNotes: false` in `src/config/clinic.ts`. That hides every placeholder badge, "draft" label and "[confirm]" marker in one go.
@@ -103,7 +103,7 @@ Put source images in **`assets/photos/`** (JPG, PNG, WebP, AVIF or SVG). `npm ru
 
 | Name | Used for | Ideal shape |
 |---|---|---|
-| `hero-family` | Hero | 5:4 |
+| `hero-family` | Hero | 4:5 portrait |
 | `family` | "For the whole family" | 4:3 |
 | `dentist-1`, `dentist-2` | Team (add more in `clinic.ts`) | 4:5 portrait |
 | `tip-*` | Blog covers | 16:10 / 16:9 |

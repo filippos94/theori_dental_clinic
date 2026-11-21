@@ -30,7 +30,7 @@ export function CookieConsent({ s, lang }: { s: S; lang: string }) {
       role="dialog"
       aria-modal="false"
       aria-labelledby="cookie-title"
-      className="fixed inset-x-3 bottom-[5.25rem] z-[60] mx-auto max-w-xl animate-pop rounded-[1.75rem] bg-white p-4 shadow-[0_20px_60px_-15px_rgba(23,49,59,0.45)] ring-2 ring-aqua-100 outline-none sm:p-6 md:bottom-5"
+      className="fixed inset-x-3 bottom-[5.25rem] z-[60] mx-auto max-w-lg animate-pop rounded-2xl border border-line bg-white p-5 shadow-[var(--shadow-pop)] outline-none sm:p-6 md:bottom-5 md:left-5 md:right-auto md:mx-0"
     >
       <h2 id="cookie-title" className="text-base text-ink sm:text-lg">{s.title}</h2>
       <p className="mt-1.5 text-sm text-ink-soft sm:text-[0.95rem]">
@@ -41,11 +41,11 @@ export function CookieConsent({ s, lang }: { s: S; lang: string }) {
       {details && (
         <fieldset className="mt-4 grid gap-3">
           <legend className="sr-only">{s.customise}</legend>
-          <label className="flex items-start gap-3 rounded-2xl bg-aqua-50 p-3">
+          <label className="flex items-start gap-3 rounded-xl bg-cream p-3">
             <input type="checkbox" checked disabled className="mt-1 size-5 accent-aqua-700" />
             <span><strong>{s.necessary}</strong><br /><span className="text-sm text-ink-soft">{s.necessaryDesc}</span></span>
           </label>
-          <label className="flex cursor-pointer items-start gap-3 rounded-2xl bg-aqua-50 p-3">
+          <label className="flex cursor-pointer items-start gap-3 rounded-xl bg-cream p-3">
             <input type="checkbox" checked={media} onChange={(e) => setMedia(e.target.checked)} className="mt-1 size-5 accent-aqua-700" />
             <span><strong>{s.media}</strong><br /><span className="text-sm text-ink-soft">{s.mediaDesc}</span></span>
           </label>
@@ -57,10 +57,10 @@ export function CookieConsent({ s, lang }: { s: S; lang: string }) {
           <button type="button" className="btn btn-primary col-span-2 !min-h-11" onClick={() => decide(media)}>{s.save}</button>
         ) : (
           <>
-            <button type="button" className="btn btn-primary !min-h-11 !px-3 !text-[0.95rem] !shadow-none" onClick={() => decide(true)}>{s.accept}</button>
+            <button type="button" className="btn btn-book !min-h-11 !px-3 !text-[0.95rem]" onClick={() => decide(true)}>{s.accept}</button>
             {/* Equal prominence for "reject", as required by EU guidance */}
-            <button type="button" className="btn btn-primary !min-h-11 !px-3 !text-[0.95rem] !shadow-none" onClick={() => decide(false)}>{s.reject}</button>
-            <button type="button" className="col-span-2 min-h-11 font-display font-bold text-aqua-700 underline underline-offset-4" onClick={() => setDetails(true)}>{s.customise}</button>
+            <button type="button" className="btn btn-book !min-h-11 !px-3 !text-[0.95rem]" onClick={() => decide(false)}>{s.reject}</button>
+            <button type="button" className="col-span-2 min-h-11 text-sm font-semibold text-ink-soft underline underline-offset-4 hover:text-ink" onClick={() => setDetails(true)}>{s.customise}</button>
           </>
         )}
       </div>

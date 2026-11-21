@@ -52,7 +52,13 @@
     "ctaCall": "Call {phone}",
     "googleBadge": "{rating} on Google",
     "googleBadgeSub": "Read our reviews",
-    "imageAlt": "A smiling family"
+    "imageAlt": "A smiling family",
+    "ratingCard": "Google rating",
+    "trust": [
+      "Open six days a week",
+      "In the centre of Paphos",
+      "Care for all ages"
+    ]
   },
   "services": {
     "title": "How we can help",
@@ -107,7 +113,8 @@
         "short": "Toothache or accident? Call us today.",
         "detail": "Severe pain, swelling, a broken tooth or a knocked-out tooth: call us as early as possible and we'll do our best to see you the same day during opening hours."
       }
-    }
+    },
+    "eyebrow": "Treatments"
   },
   "family": {
     "title": "For the whole family",
@@ -122,7 +129,8 @@
       "Raise a hand to pause, any time",
       "Family appointments back-to-back"
     ],
-    "imageAlt": "A parent and child smiling together"
+    "imageAlt": "A parent and child smiling together",
+    "eyebrow": "Families & nervous patients"
   },
   "team": {
     "title": "Meet the team",
@@ -138,7 +146,8 @@
         "role": "Cosmetic & Restorative Dentistry",
         "bio": "[Placeholder bio] Passionate about natural-looking results and explaining every option clearly, so you can decide with confidence."
       }
-    }
+    },
+    "eyebrow": "Our team"
   },
   "tips": {
     "title": "Dental tips",
@@ -162,7 +171,8 @@
       "kids": "Kids",
       "whitening": "Whitening",
       "cosmetic": "Cosmetic"
-    }
+    },
+    "eyebrow": "Journal"
   },
   "reviews": {
     "title": "Kind words from our patients",
@@ -171,24 +181,56 @@
     "readOnGoogle": "Read our reviews on Google",
     "carouselLabel": "Patient reviews",
     "items": [
-      { "name": "[Sample] Maria K.", "text": "I've always been nervous at the dentist, but the team explained everything and were so patient. I actually look forward to my check-ups now!" },
-      { "name": "[Sample] James P.", "text": "Brought my two kids for their first visit. They came out grinning with stickers and asked when they can go back. Brilliant." },
-      { "name": "[Sample] Eleni A.", "text": "Had a toothache on a Monday morning and they fitted me in the same day. Friendly, professional and very clear about the costs." },
-      { "name": "[Sample] Andreas C.", "text": "Lovely bright clinic, no waiting around, and my teeth have never felt cleaner. Highly recommend." }
-    ]
+      {
+        "name": "[Sample] Maria K.",
+        "text": "I've always been nervous at the dentist, but the team explained everything and were so patient. I actually look forward to my check-ups now!"
+      },
+      {
+        "name": "[Sample] James P.",
+        "text": "Brought my two kids for their first visit. They came out grinning with stickers and asked when they can go back. Brilliant."
+      },
+      {
+        "name": "[Sample] Eleni A.",
+        "text": "Had a toothache on a Monday morning and they fitted me in the same day. Friendly, professional and very clear about the costs."
+      },
+      {
+        "name": "[Sample] Andreas C.",
+        "text": "Lovely bright clinic, no waiting around, and my teeth have never felt cleaner. Highly recommend."
+      }
+    ],
+    "eyebrow": "Reviews"
   },
   "faq": {
     "title": "Questions? We've got answers",
     "subtitle": "Can't find what you're looking for? Just give us a call.",
     "placeholderNote": "Answers marked [confirm] need checking by the clinic.",
     "items": [
-      { "q": "What happens at my first visit?", "a": "We'll say hello, ask about your health and any worries, then do a gentle check of your teeth and gums. If X-rays are needed we'll explain why. Before anything else happens, we talk you through what we found and your options. No surprises." },
-      { "q": "From what age should my child see a dentist?", "a": "We recommend a first visit around your child's first birthday, or when the first teeth appear. Early, relaxed visits help children feel at home at the dentist." },
-      { "q": "How can I pay?", "a": "[confirm] We accept cash and card. We'll always give you a clear cost estimate before treatment. Please ask us about payment for larger treatment plans and about insurance." },
-      { "q": "What should I do in a dental emergency?", "a": "Call us on +357 26 937970 as early as possible. We keep time aside for emergencies and will do our best to see you the same day during opening hours. If a tooth is knocked out, keep it moist in milk and call straight away." },
-      { "q": "Is there parking nearby?", "a": "[confirm] Yes, there is street parking close to the clinic on Nikolaou Nikolaidi Avenue. Tap \"Get directions\" below for a route." },
-      { "q": "Which languages do you speak?", "a": "[confirm] Our team speaks Greek and English, so you can ask anything in the language you're most comfortable with." }
-    ]
+      {
+        "q": "What happens at my first visit?",
+        "a": "We'll say hello, ask about your health and any worries, then do a gentle check of your teeth and gums. If X-rays are needed we'll explain why. Before anything else happens, we talk you through what we found and your options. No surprises."
+      },
+      {
+        "q": "From what age should my child see a dentist?",
+        "a": "We recommend a first visit around your child's first birthday, or when the first teeth appear. Early, relaxed visits help children feel at home at the dentist."
+      },
+      {
+        "q": "How can I pay?",
+        "a": "[confirm] We accept cash and card. We'll always give you a clear cost estimate before treatment. Please ask us about payment for larger treatment plans and about insurance."
+      },
+      {
+        "q": "What should I do in a dental emergency?",
+        "a": "Call us on +357 26 937970 as early as possible. We keep time aside for emergencies and will do our best to see you the same day during opening hours. If a tooth is knocked out, keep it moist in milk and call straight away."
+      },
+      {
+        "q": "Is there parking nearby?",
+        "a": "[confirm] Yes, there is street parking close to the clinic on Nikolaou Nikolaidi Avenue. Tap \"Get directions\" below for a route."
+      },
+      {
+        "q": "Which languages do you speak?",
+        "a": "[confirm] Our team speaks Greek and English, so you can ask anything in the language you're most comfortable with."
+      }
+    ],
+    "eyebrow": "FAQ"
   },
   "book": {
     "title": "Book an appointment",
@@ -224,9 +266,10 @@
       "consent": "Please tick the box so we can contact you.",
       "send": "Sorry, something went wrong sending your request. Please try again or call us."
     },
-    "successTitle": "Yay, request received!",
+    "successTitle": "Request received",
     "successText": "Thank you, {name}. We'll be in touch soon to confirm your appointment. If it's urgent, give us a call.",
-    "successAgain": "Send another request"
+    "successAgain": "Send another request",
+    "eyebrow": "Appointments"
   },
   "contact": {
     "title": "Come and see us",
@@ -259,7 +302,8 @@
       "fri": "Friday",
       "sat": "Saturday",
       "sun": "Sunday"
-    }
+    },
+    "eyebrow": "Visit us"
   },
   "footer": {
     "tagline": "Friendly family dentistry in Paphos.",
@@ -276,7 +320,7 @@
     "sun": "Sunday"
   },
   "cookies": {
-    "title": "A quick word about cookies 🍪",
+    "title": "Your privacy",
     "text": "We only use essential storage to make this site work. With your OK, we'll also load Google Maps, which may set its own cookies.",
     "accept": "Accept all",
     "reject": "Essential only",
@@ -293,12 +337,30 @@
     "draftNote": "Template text: to be reviewed by the clinic (and ideally a legal adviser) before going live.",
     "updated": "Last updated: [date]",
     "sections": [
-      { "h": "Who we are", "p": "Theori Dental Clinic, Leoforos Nikolaou I. Nikolaidi 19, Paphos 8010, Cyprus, is the controller of the personal data collected through this website. You can contact us on +357 26 937970 [or by email: to be added]." },
-      { "h": "What we collect", "p": "When you send an appointment request we receive your name, phone number, email address (if given), the treatment you are interested in, your preferred date and time and any message you write. Please don't include detailed medical information in the form; we'll discuss that with you in person." },
-      { "h": "Why we use it", "p": "We use these details only to contact you about your appointment request (legal basis: your consent and steps prior to providing care). We do not sell your data or use it for marketing." },
-      { "h": "How long we keep it", "p": "Appointment requests are deleted after [X months] unless you become a patient, in which case your records are kept in line with Cypriot health record regulations." },
-      { "h": "Who else sees it", "p": "Form submissions are processed by our website hosting provider [Netlify / Formspree: confirm] on our behalf, under a data-processing agreement." },
-      { "h": "Your rights", "p": "You can ask to see, correct or delete your data, withdraw consent at any time, and complain to the Commissioner for Personal Data Protection in Cyprus (dataprotection.gov.cy)." }
+      {
+        "h": "Who we are",
+        "p": "Theori Dental Clinic, Leoforos Nikolaou I. Nikolaidi 19, Paphos 8010, Cyprus, is the controller of the personal data collected through this website. You can contact us on +357 26 937970 [or by email: to be added]."
+      },
+      {
+        "h": "What we collect",
+        "p": "When you send an appointment request we receive your name, phone number, email address (if given), the treatment you are interested in, your preferred date and time and any message you write. Please don't include detailed medical information in the form; we'll discuss that with you in person."
+      },
+      {
+        "h": "Why we use it",
+        "p": "We use these details only to contact you about your appointment request (legal basis: your consent and steps prior to providing care). We do not sell your data or use it for marketing."
+      },
+      {
+        "h": "How long we keep it",
+        "p": "Appointment requests are deleted after [X months] unless you become a patient, in which case your records are kept in line with Cypriot health record regulations."
+      },
+      {
+        "h": "Who else sees it",
+        "p": "Form submissions are processed by our website hosting provider [Netlify / Formspree: confirm] on our behalf, under a data-processing agreement."
+      },
+      {
+        "h": "Your rights",
+        "p": "You can ask to see, correct or delete your data, withdraw consent at any time, and complain to the Commissioner for Personal Data Protection in Cyprus (dataprotection.gov.cy)."
+      }
     ],
     "cookiesTitle": "Cookie notice",
     "cookiesText": "This site uses your browser's local storage to remember your cookie choice (essential). If you allow it, the contact section loads an interactive Google Maps map, and Google may set cookies and process your IP address under its own privacy policy. We do not use analytics or advertising cookies. You can change your choice at any time with the button below or the \"Cookie settings\" link in the footer."
